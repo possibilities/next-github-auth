@@ -18,11 +18,11 @@ const Navigation = () => {
         &nbsp; | &nbsp;
       </li>
       <li style={itemStyle}>
-        <Link href='/public-page'><a>public page</a></Link>
+        <Link href='/public'><a>public page</a></Link>
         &nbsp; | &nbsp;
       </li>
       <li style={itemStyle}>
-        <Link href='/private-page'><a>private page</a></Link>
+        <Link href='/private'><a>private page</a></Link>
       </li>
     </ul>
   )
