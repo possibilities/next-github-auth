@@ -8,15 +8,14 @@ import InjectGithubUser from '../pageWrappers/InjectGithubUser'
 const Home = ({
   githubUser,
   githubToken,
-  githubClientId,
-  isSignedIn,
+  githubClientId
 }) => {
   return (
     <div>
       <Navigation />
 
       <SignInOrProfileLink
-        isSignedIn={isSignedIn}
+        githubUser={githubUser}
         githubClientId={githubClientId} />
 
       <br />

@@ -7,11 +7,11 @@ const styles = {
   top: 10,
 }
 
-export default ({ isSignedIn, ...linkProps }) => (
+export default ({ githubUser, githubClientId }) => (
   <div style={styles}>
-    {isSignedIn
-      ? <ProfileLink {...linkProps} />
-      : <SignInLink {...linkProps} />
+    {githubUser
+      ? <ProfileLink githubUser={githubUser} />
+      : <SignInLink githubClientId={githubClientId} />
     }
   </div>
 )

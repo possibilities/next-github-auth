@@ -5,7 +5,6 @@ import InjectGithubToken from '../pageWrappers/InjectGithubToken'
 import InjectGithubUser from '../pageWrappers/InjectGithubUser'
 
 const Public = ({
-  isSignedIn,
   githubClientId,
   githubToken,
   githubUser
@@ -14,7 +13,7 @@ const Public = ({
     <Navigation />
 
     <SignInOrProfileLink
-      isSignedIn={isSignedIn}
+      githubUser={githubUser}
       githubClientId={githubClientId} />
     <br />
 

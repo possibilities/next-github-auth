@@ -5,7 +5,6 @@ import InjectGithubToken from '../pageWrappers/InjectGithubToken'
 import InjectGithubUser from '../pageWrappers/InjectGithubUser'
 
 const Private = ({
-  isSignedIn,
   githubClientId,
   githubUser,
   githubToken
@@ -15,7 +14,7 @@ const Private = ({
       <Navigation />
 
       <SignInOrProfileLink
-        isSignedIn={isSignedIn}
+        githubUser={githubUser}
         githubClientId={githubClientId} />
 
       <br />
