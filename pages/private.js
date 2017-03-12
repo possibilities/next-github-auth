@@ -1,6 +1,6 @@
 import Navigation from '../components/Navigation'
 import SignInOrProfileLink from '../components/SignInOrProfileLink'
-import InjectEnv from '../pageWrappers/InjectEnv'
+import InjectEnv from '../decorators/InjectEnv'
 import InjectGithubToken from '../decorators/InjectGithubToken'
 import InjectGithubUser from '../decorators/InjectGithubUser'
 import EnsureSignedIn from '../decorators/EnsureSignedIn'
