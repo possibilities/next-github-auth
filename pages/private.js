@@ -4,8 +4,7 @@ import PrivatePage from '../decorators/PrivatePage'
 
 const Private = ({
   githubClientId,
-  githubUser,
-  githubToken
+  githubUser
 }) => (
   <div>
     <Navigation />
@@ -16,12 +15,7 @@ const Private = ({
 
     <br />
 
-    <div>private page!</div>
-
-    <br />
-
-    {githubToken && <div>token: {githubToken}</div>}
-    {githubUser && <div>user: {githubUser.login}</div>}
+    <div>private page! (private data: {githubUser.login})</div>
   </div>
 )
 

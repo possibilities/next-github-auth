@@ -4,7 +4,6 @@ import PublicPage from '../decorators/PublicPage'
 
 const Home = ({
   githubUser,
-  githubToken,
   githubClientId
 }) => (
   <div>
@@ -17,11 +16,6 @@ const Home = ({
     <br />
 
     <div>home page!</div>
-
-    <br />
-
-    {githubToken && <div>token: {githubToken}</div>}
-    {githubUser && <div>user: {githubUser.login}</div>}
   </div>
 )
 
