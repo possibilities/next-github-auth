@@ -3,7 +3,8 @@ import Link from 'next/link'
 const Navigation = () => {
   const listStyle = {
     listStyle: 'none',
-    margin: 0, paddingLeft: 0,
+    margin: 0,
+    paddingLeft: 0,
     display: 'inline-block'
   }
 

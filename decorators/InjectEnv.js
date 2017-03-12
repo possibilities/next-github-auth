@@ -4,7 +4,7 @@ import assertEnvVar from '../modules/assertEnvVar'
 
 const InjectEnv = Page => {
   return class InjectEnvWrapper extends Component {
-    static async getInitialProps(context) {
+    static async getInitialProps (context) {
       const env = getEnv()
 
       const pageProps = Page.getInitialProps
@@ -14,7 +14,7 @@ const InjectEnv = Page => {
       return { ...pageProps, ...env }
     }
 
-    render() {
+    render () {
       return <Page {...this.props} />
     }
   }

@@ -1,14 +1,14 @@
-import Document, { Head, Main, NextScript } from 'next/document';
+import Document, { Head, Main, NextScript } from 'next/document'
 import getEnv from '../modules/getEnv'
 
 class Root extends Document {
-  static async getInitialProps(context) {
+  static async getInitialProps (context) {
     const props = await super.getInitialProps(context)
     const page = context.renderPage()
     return { ...page, env: getEnv() }
   }
 
-  render() {
+  render () {
     return (
       <html>
         <Head>

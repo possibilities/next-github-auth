@@ -13,7 +13,7 @@ export default class SignOut extends Component {
     return {}
   }
 
-  constructor() {
+  constructor () {
     super()
     window.location = '/sign-out'
   }
