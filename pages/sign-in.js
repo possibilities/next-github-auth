@@ -2,6 +2,7 @@ import { Component } from 'react'
 import request from 'axios'
 import assertEnvVar from '../modules/assertEnvVar'
 import InjectEnv from '../decorators/InjectEnv'
+import Navigation from '../components/Navigation'
 
 const githubAccessTokenUrl = 'https://github.com/login/oauth/access_token'
 const githubClientSecret = assertEnvVar('GITHUB_CLIENT_SECRET')
@@ -58,7 +59,17 @@ class SignIn extends Component {
     }
   }
 
-  render () { return <div>Sign in with GitHub was successful! Redirecting...</div> }
+  render () {
+    return (
+      <div>
+        <Navigation />
+
+        <br />
+
+        <div>Sign in with GitHub was successful! Redirecting...</div>
+      </div>
+    )
+  }
 }
 
 export default InjectEnv(SignIn)
