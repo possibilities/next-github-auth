@@ -1,6 +1,5 @@
 import { Component } from 'react'
 import getEnv from '../modules/getEnv'
-import assertEnvVar from '../modules/assertEnvVar'
 
 const InjectEnv = Page => {
   return class InjectEnvWrapper extends Component {

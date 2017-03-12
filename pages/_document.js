@@ -3,7 +3,6 @@ import getEnv from '../modules/getEnv'
 
 class Root extends Document {
   static async getInitialProps (context) {
-    const props = await super.getInitialProps(context)
     const page = context.renderPage()
     return { ...page, env: getEnv() }
   }

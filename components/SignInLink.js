@@ -1,4 +1,3 @@
-import Link from 'next/link'
 import getGithubAuthorizeUrl from '../modules/getGithubAuthorizeUrl'
 
 const handleSignIn = githubClientId => event => {

@@ -22,7 +22,6 @@ const fetchGithubAccessToken = async (code, githubClientId) => {
 class SignIn extends Component {
   static async getInitialProps (context) {
     const {
-      req,
       res,
       query,
       githubClientId

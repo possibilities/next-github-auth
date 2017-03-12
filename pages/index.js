@@ -1,4 +1,3 @@
-import { Component } from 'react'
 import Navigation from '../components/Navigation'
 import SignInOrProfileLink from '../components/SignInOrProfileLink'
 import InjectEnv from '../decorators/InjectEnv'
