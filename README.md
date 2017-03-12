@@ -1,6 +1,6 @@
 # Next github auth example
 
-A [next.js](https://github.com/zeit/next.js) example using [Github](https://github.com) auth
+A [Next.js](https://github.com/zeit/next.js) example using [Github](https://github.com) authentication
 
 [![CircleCI](https://circleci.com/gh/possibilities/next-github-auth-example.svg?style=svg)](https://circleci.com/gh/possibilities/next-github-auth-example)
 
