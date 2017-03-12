@@ -1,7 +1,7 @@
 import { Component } from 'react'
 import request from 'axios'
 import assertEnvVar from '../modules/assertEnvVar'
-import setGithubAccessTokenCookie from '../modules/setGithubAccessTokenCookie'
+import getGithubAccessTokenCookie from '../modules/getGithubAccessTokenCookie'
 import InjectEnv from '../decorators/InjectEnv'
 import Navigation from '../components/Navigation'
 const githubAccessTokenUrl = 'https://github.com/login/oauth/access_token'
@@ -23,6 +23,7 @@ const fetchGithubAccessToken = async (code, githubClientId) => {
 class SignIn extends Component {
   static async getInitialProps (context) {
     const {
+      req,
       res,
       query,
       githubClientId
@@ -33,11 +34,15 @@ class SignIn extends Component {
       const accessToken =
         await fetchGithubAccessToken(code, githubClientId)
 
+      let githubAccessTokenCookie
       if (accessToken) {
-        setGithubAccessTokenCookie(res, accessToken)
+        githubAccessTokenCookie =
+          githubAccessTokenCookie = getGithubAccessTokenCookie(req, accessToken)
       } else {
-        setGithubAccessTokenCookie(res, '')
+        githubAccessTokenCookie = getGithubAccessTokenCookie(req, '')
       }
+
+      res.setHeader('Set-Cookie', githubAccessTokenCookie)
 
       return { nextUrl }
     }

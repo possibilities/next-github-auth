@@ -1,11 +1,14 @@
 import { Component } from 'react'
-import setGithubAccessTokenCookie from '../modules/setGithubAccessTokenCookie'
+import getGithubAccessTokenCookie from '../modules/getGithubAccessTokenCookie'
 
 export default class SignOut extends Component {
-  static getInitialProps ({ res }) {
+  static getInitialProps ({ req, res }) {
     if (!process.browser) {
-      setGithubAccessTokenCookie(res, '')
-      res.writeHead(302, { Location: '/' })
+      const githubAccessTokenCookie = getGithubAccessTokenCookie(req, '')
+      res.writeHead(302, {
+        'Set-Cookie': githubAccessTokenCookie,
+        Location: '/'
+      })
       res.end()
     }
 
