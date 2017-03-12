@@ -21,8 +21,8 @@ const Public = ({
 
     <br />
 
-    <div>token: {githubToken}</div>
-    <div>user: {githubUser ? githubUser.login : 'n/a'}</div>
+    {githubToken && <div>token: {githubToken}</div>}
+    {githubUser && <div>user: {githubUser.login}</div>}
   </div>
 )
 
