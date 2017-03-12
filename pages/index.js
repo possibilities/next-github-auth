@@ -1,14 +1,11 @@
 import Navigation from '../components/Navigation'
-import ProfileLink from '../components/ProfileLink'
-import SignInLink from '../components/SignInLink'
+import SignInOrProfileLink from '../components/SignInOrProfileLink'
 
 export default ({ isSignedIn }) => {
-  const signInOrProfile = isSignedIn ? <ProfileLink /> : <SignInLink />
-
   return (
     <div>
       <Navigation />
-      {signInOrProfile}
+      <SignInOrProfileLink isSignedIn={isSignedIn} />
       <br />
       <div>home page!</div>
     </div>
