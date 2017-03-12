@@ -1,7 +1,7 @@
 import Document, { Head, Main, NextScript } from 'next/document'
 import getEnv from '../modules/getEnv'
 
-const resetCssUrl = 
+const resetCssUrl =
   'https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css'
 
 class Root extends Document {

@@ -53,7 +53,7 @@ const InjectGithubUser = Page => {
       }
     }
 
-    componentWillMount() {
+    componentWillMount () {
       if (process.browser) {
         const { githubUser } = this.props
         const serializedUser = githubUser ? JSON.stringify(githubUser) : null
@@ -68,7 +68,7 @@ const InjectGithubUser = Page => {
       }
     }
 
-    componentWillUnmount() {
+    componentWillUnmount () {
     }
 
     render () {

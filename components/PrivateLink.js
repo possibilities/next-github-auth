@@ -1,5 +1,4 @@
 import Link from 'next/link'
-import Router from 'next/router'
 import getGithubAuthorizeUrl from '../modules/getGithubAuthorizeUrl'
 
 const handleClick = (githubClientId, href) => event => {
@@ -17,10 +16,7 @@ const PrivateLink = ({
   githubUser
     ? <Link href={href}><a>{children}</a></Link>
     : (
-      <a
-        href='#'
-        onClick={handleClick(githubClientId, href)}>
-
+      <a href='#' onClick={handleClick(githubClientId, href)}>
         {children}
       </a>
     )
