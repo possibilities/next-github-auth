@@ -15,7 +15,8 @@ const getGithubToken = req => {
 
 const InjectGithubToken = Page => {
   return class InjectTokenWrapper extends Component {
-    static async getInitialProps({ req }) {
+    static async getInitialProps(context) {
+      const { req } = context
       const githubToken = getGithubToken(req)
       const pageProps = Page.getInitialProps
         ? await Page.getInitialProps({ ...context, githubToken })
