@@ -11,25 +11,21 @@ const Navigation = () => {
     display: 'inline-block'
   }
 
-  const navigation = (
-    <ul style={listStyle}>
-      <li style={itemStyle}>
-        <Link href='/'><a>home</a></Link>
-        &nbsp; | &nbsp;
-      </li>
-      <li style={itemStyle}>
-        <Link href='/public'><a>public page</a></Link>
-        &nbsp; | &nbsp;
-      </li>
-      <li style={itemStyle}>
-        <Link href='/private'><a>private page</a></Link>
-      </li>
-    </ul>
-  )
-
   return (
     <div>
-      Navigation: {navigation}
+      <ul style={listStyle}>
+        <li style={itemStyle}>
+          <Link href='/'><a>home</a></Link>
+          &nbsp; | &nbsp;
+        </li>
+        <li style={itemStyle}>
+          <Link href='/public'><a>public page</a></Link>
+          &nbsp; | &nbsp;
+        </li>
+        <li style={itemStyle}>
+          <Link href='/private'><a>private page</a></Link>
+        </li>
+      </ul>
     </div>
   )
 }
