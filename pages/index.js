@@ -2,13 +2,9 @@ import { Component } from 'react'
 import Navigation from '../components/Navigation'
 import SignInOrProfileLink from '../components/SignInOrProfileLink'
 import getEnvironment from '../modules/getEnvironment'
+import InjectEnv from '../pageWrappers/InjectEnv'
 
-export default class Home extends Component {
-  static async getInitialProps() {
-    const { githubClientId } = getEnvironment()
-    return { githubClientId }
-  }
-
+class Home extends Component {
   render() {
     return (
       <div>
@@ -22,3 +18,5 @@ export default class Home extends Component {
     )
   }
 }
+
+export default InjectEnv(Home)

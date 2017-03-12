@@ -14,15 +14,15 @@ const Navigation = () => {
   const navigation = (
     <ul style={listStyle}>
       <li style={itemStyle}>
-        <Link href='/'>home</Link>
+        <Link href='/'><a>home</a></Link>
         &nbsp; | &nbsp;
       </li>
       <li style={itemStyle}>
-        <Link href='/public-page'>public page</Link>
+        <Link href='/public-page'><a>public page</a></Link>
         &nbsp; | &nbsp;
       </li>
       <li style={itemStyle}>
-        <Link href='/private-page'>private page</Link>
+        <Link href='/private-page'><a>private page</a></Link>
       </li>
     </ul>
   )
