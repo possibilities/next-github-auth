@@ -1,7 +1,6 @@
 import { Component } from 'react'
 import Navigation from '../components/Navigation'
 import SignInOrProfileLink from '../components/SignInOrProfileLink'
-import getEnvironment from '../modules/getEnvironment'
 import InjectEnv from '../pageWrappers/InjectEnv'
 
 class Home extends Component {

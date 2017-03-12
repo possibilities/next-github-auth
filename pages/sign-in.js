@@ -1,15 +1,12 @@
 import { Component } from 'react'
 import request from 'axios'
 import assertEnvVar from '../modules/assertEnvVar'
-import getEnvironment from '../modules/getEnvironment'
+import InjectEnv from '../pageWrappers/InjectEnv'
 
 const githubAccessTokenUrl = 'https://github.com/login/oauth/access_token'
 const githubClientSecret = assertEnvVar('GITHUB_CLIENT_SECRET')
 
-const fetchGithubAccessToken = async (
-  code,
-  githubClientId
-) => {
+const fetchGithubAccessToken = async (code, githubClientId) => {
   const response = await request.post(githubAccessTokenUrl, {
     code,
     client_id: githubClientId,
@@ -23,17 +20,18 @@ const fetchGithubAccessToken = async (
 }
 
 class SignIn extends Component {
-  static async getInitialProps({
-    req,
-    res,
-    query
-  }) {
-    const { githubClientId } = getEnvironment()
+  static async getInitialProps(context) {
+    const {
+      req,
+      res,
+      query,
+      githubClientId
+    } = context
 
     if (!process.browser) {
       const { code } = query
       const accessToken =
-        await fetchGithubAccessToken(code, githubClientId, githubClientSecret)
+        await fetchGithubAccessToken(code, githubClientId)
 
       if (accessToken) {
         res.setHeader(
@@ -46,9 +44,9 @@ class SignIn extends Component {
           'Set-Cookie', `githubAccessToken=; SameSite=Strict`
         )
       }
-
-      return {}
     }
+
+    return {}
   }
 
   constructor () {
@@ -64,4 +62,4 @@ class SignIn extends Component {
   render () { return <div>Sign in with GitHub was successful! Redirecting...</div> }
 }
 
-export default SignIn
+export default InjectEnv(SignIn)

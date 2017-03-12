@@ -1,6 +1,6 @@
 import assertEnvVar from '../modules/assertEnvVar'
 
-export default function getEnvironment() {
+const getEnv = () => {
   // Accumulate the data server side
   if (!process.browser) {
     const githubClientId = assertEnvVar('GITHUB_CLIENT_ID')
@@ -10,3 +10,5 @@ export default function getEnvironment() {
   // On the client grab it from a global
   return window.___nextEnv
 }
+
+export default getEnv

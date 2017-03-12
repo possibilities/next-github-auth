@@ -1,13 +1,18 @@
 import Navigation from '../components/Navigation'
 import SignInOrProfileLink from '../components/SignInOrProfileLink'
+import InjectEnv from '../pageWrappers/InjectEnv'
 
-export default ({ isSignedIn }) => {
+const Private = ({ isSignedIn, githubClientId }) => {
   return (
     <div>
       <Navigation />
-      <SignInOrProfileLink isSignedIn={isSignedIn} />
+      <SignInOrProfileLink
+        isSignedIn={isSignedIn}
+        githubClientId={githubClientId} />
       <br />
       <div>private page!</div>
     </div>
   )
 }
+
+export default InjectEnv(Private)
