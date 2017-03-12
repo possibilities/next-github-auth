@@ -1,6 +1,9 @@
 import Document, { Head, Main, NextScript } from 'next/document'
 import getEnv from '../modules/getEnv'
 
+const resetCssUrl = 
+  'https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css'
+
 class Root extends Document {
   static async getInitialProps (context) {
     const props = await super.getInitialProps(context)
@@ -18,9 +21,10 @@ class Root extends Document {
               __html: `window.___nextEnv = ${JSON.stringify(this.props.env)}`
             }}
           />
+          <link rel='stylesheet' href={resetCssUrl} />
         </Head>
 
-        <body>
+        <body style={{ margin: 10 }}>
           <Main />
           <NextScript />
         </body>
