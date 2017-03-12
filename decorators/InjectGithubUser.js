@@ -19,7 +19,7 @@ const getGithubUser = async githubToken => {
 }
 
 const InjectGithubUser = Page => {
-  return class InjectTokenWrapper extends Component {
+  return class InjectGithubUserWrapper extends Component {
     static async getInitialProps (context) {
       const { githubToken } = context
       const githubUser = await getGithubUser(githubToken)
@@ -31,13 +31,36 @@ const InjectGithubUser = Page => {
 
     constructor (props) {
       super(props)
+
+      this.state = {
+        githubUser: props.githubUser
+      }
+
       if (process.browser) {
         window.___nextGithubUser = props.githubUser
       }
     }
 
+    componentWillMount() {
+      if (process.browser) {
+        const { githubUser } = this.props
+        const serializedUser = githubUser ? JSON.stringify(githubUser) : null
+        window.localStorage.setItem('githubUser', serializedUser)
+        window.onstorage = ({ key, newValue = null }) => {
+          if (key === 'githubUser') {
+            this.setState({
+              githubUser: newValue ? JSON.parse(newValue) : null
+            })
+          }
+        }
+      }
+    }
+
+    componentWillUnmount() {
+    }
+
     render () {
-      return <Page {...this.props} />
+      return <Page {...this.props} githubUser={this.state.githubUser} />
     }
   }
 }

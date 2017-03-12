@@ -10,6 +10,12 @@ const EnsureSignedIn = Page => {
       }
     }
 
+    componentWillReceiveProps(nextProps) {
+      if (process.browser && !nextProps.githubUser) {
+        window.location = '/'
+      }
+    }
+
     render () {
       if (this.props.githubUser) {
         return <Page {...this.props} />
