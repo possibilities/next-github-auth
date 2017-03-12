@@ -1,9 +1,9 @@
 import Navigation from '../components/Navigation'
 import SignInOrProfileLink from '../components/SignInOrProfileLink'
 import InjectEnv from '../pageWrappers/InjectEnv'
-import InjectGithubToken from '../pageWrappers/InjectGithubToken'
-import InjectGithubUser from '../pageWrappers/InjectGithubUser'
-import EnsureSignedIn from '../pageWrappers/EnsureSignedIn'
+import InjectGithubToken from '../decorators/InjectGithubToken'
+import InjectGithubUser from '../decorators/InjectGithubUser'
+import EnsureSignedIn from '../decorators/EnsureSignedIn'
 
 const Private = ({
   githubClientId,

@@ -1,9 +1,9 @@
 import { Component } from 'react'
 import Navigation from '../components/Navigation'
 import SignInOrProfileLink from '../components/SignInOrProfileLink'
-import InjectEnv from '../pageWrappers/InjectEnv'
-import InjectGithubToken from '../pageWrappers/InjectGithubToken'
-import InjectGithubUser from '../pageWrappers/InjectGithubUser'
+import InjectEnv from '../decorators/InjectEnv'
+import InjectGithubToken from '../decorators/InjectGithubToken'
+import InjectGithubUser from '../decorators/InjectGithubUser'
 
 const Home = ({
   githubUser,
