@@ -3,6 +3,12 @@ import getGithubAuthorizeUrl from '../modules/getGithubAuthorizeUrl'
 
 const EnsureSignedIn = Page => {
   return class EnsureSignedInWrapper extends Component {
+    static async getInitialProps (context) {
+      return Page.getInitialProps
+        ? await Page.getInitialProps(context)
+        : {}
+    }
+
     constructor (props) {
       super(props)
       if (process.browser && !props.githubUser) {
