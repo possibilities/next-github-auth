@@ -3,30 +3,29 @@ import SignInOrProfileLink from '../components/SignInOrProfileLink'
 import InjectEnv from '../pageWrappers/InjectEnv'
 import InjectGithubToken from '../pageWrappers/InjectGithubToken'
 import InjectGithubUser from '../pageWrappers/InjectGithubUser'
+import EnsureSignedIn from '../pageWrappers/EnsureSignedIn'
 
 const Private = ({
   githubClientId,
   githubUser,
   githubToken
-}) => {
-  return (
-    <div>
-      <Navigation />
+}) => (
+  <div>
+    <Navigation />
 
-      <SignInOrProfileLink
-        githubUser={githubUser}
-        githubClientId={githubClientId} />
+    <SignInOrProfileLink
+      githubUser={githubUser}
+      githubClientId={githubClientId} />
 
-      <br />
+    <br />
 
-      <div>private page!</div>
+    <div>private page!</div>
 
-      <br />
+    <br />
 
-      <div>token: {githubToken}</div>
-      <div>user: {githubUser ? githubUser.login : 'n/a'}</div>
-    </div>
-  )
-}
+    <div>token: {githubToken}</div>
+    <div>user: {githubUser ? githubUser.login : 'n/a'}</div>
+  </div>
+)
 
-export default InjectEnv(InjectGithubToken(InjectGithubUser(Private)))
+export default InjectEnv(InjectGithubToken(InjectGithubUser(EnsureSignedIn(Private))))

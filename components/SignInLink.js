@@ -1,22 +1,8 @@
 import Link from 'next/link'
-
-const githubAuthorizeUrl = 'https://github.com/login/oauth/authorize'
-
-const queryStringFromObj = queryObj =>
-  Object.keys(queryObj)
-    .map(key => `${key}=${queryObj[key]}`)
-    .join('&')
+import getGithubAuthorizeUrl from '../modules/getGithubAuthorizeUrl'
 
 const handleSignIn = githubClientId => event => {
-  const afterAuthUrl = `${window.location.origin}/sign-in`
-
-  const githubAuthorizeParams = queryStringFromObj({
-    client_id: githubClientId,
-    redirect_uri: afterAuthUrl,
-    scope: 'repo'
-  })
-
-  window.location = `${githubAuthorizeUrl}?${githubAuthorizeParams}`
+  window.location = getGithubAuthorizeUrl(githubClientId)
   event.preventDefault()
 }
 
