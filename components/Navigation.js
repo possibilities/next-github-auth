@@ -1,6 +1,10 @@
+import PrivateLink from './PrivateLink'
 import Link from 'next/link'
 
-const Navigation = () => {
+const Navigation = ({
+  githubUser,
+  githubClientId
+}) => {
   const listStyle = {
     listStyle: 'none',
     margin: 0,
@@ -16,15 +20,25 @@ const Navigation = () => {
     <div>
       <ul style={listStyle}>
         <li style={itemStyle}>
-          <Link href='/'><a>home</a></Link>
+          <Link href='/'>
+            <a>home</a>
+          </Link>
           &nbsp; | &nbsp;
         </li>
         <li style={itemStyle}>
-          <Link href='/public'><a>public page</a></Link>
+          <Link href='/public'>
+            <a>public page</a>
+          </Link>
           &nbsp; | &nbsp;
         </li>
         <li style={itemStyle}>
-          <Link href='/private'><a>private page</a></Link>
+          <PrivateLink
+            href='/private'
+            githubUser={githubUser}
+            githubClientId={githubClientId}>
+
+            private page
+          </PrivateLink>
         </li>
       </ul>
     </div>

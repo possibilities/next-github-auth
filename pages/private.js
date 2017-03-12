@@ -7,7 +7,9 @@ const Private = ({
   githubUser
 }) => (
   <div>
-    <Navigation />
+    <Navigation
+      githubUser={githubUser}
+      githubClientId={githubClientId} />
 
     <SignInOrProfileLink
       githubUser={githubUser}

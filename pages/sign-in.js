@@ -29,7 +29,7 @@ class SignIn extends Component {
     } = context
 
     if (!process.browser) {
-      const { code } = query
+      const { code, nextUrl } = query
       const accessToken =
         await fetchGithubAccessToken(code, githubClientId)
 
@@ -44,25 +44,27 @@ class SignIn extends Component {
           'Set-Cookie', `githubAccessToken=; SameSite=Strict; HttpOnly`
         )
       }
+
+      return { nextUrl }
     }
 
     return {}
   }
 
-  constructor () {
-    super()
+  constructor (props) {
+    super(props)
     if (process.browser) {
       // Wait to redirect on the client so the cookie will be available
-      // TODO boomerang back to wherever user came from, e.g. click on private
-      // page link should redirect you to private page after signin
-      window.location = '/'
+      window.location = props.nextUrl || '/'
     }
   }
 
   render () {
     return (
       <div>
-        <Navigation />
+        <Navigation
+          githubUser={this.props.githubUser}
+          githubClientId={this.props.githubClientId} />
 
         <br />
 

@@ -5,15 +5,20 @@ const queryStringFromObj = queryObj =>
     .map(key => `${key}=${queryObj[key]}`)
     .join('&')
 
-const getGithubAuthorizeUrl = githubClientId => {
+const getGithubAuthorizeUrl = (githubClientId, nextUrl) => {
   if (!githubClientId) {
     throw new Error('Client id is not defined')
   }
-  const afterAuthUrl = `${window.location.origin}/sign-in`
+
+  let afterAuthUrl = `${window.location.origin}/sign-in`
+
+  if (nextUrl) {
+    afterAuthUrl = `${afterAuthUrl}?nextUrl=${nextUrl}`
+  }
 
   const githubAuthorizeParams = queryStringFromObj({
     client_id: githubClientId,
-    redirect_uri: afterAuthUrl,
+    redirect_uri: encodeURIComponent(afterAuthUrl),
     scope: 'repo'
   })
 
