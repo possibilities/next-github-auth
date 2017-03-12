@@ -1,14 +1,14 @@
 import { Component } from 'react'
 import request from 'axios'
 
-const getGithubUser = async githubToken => {
-  if (!githubToken) {
+const getGithubUser = async githubAccessToken => {
+  if (!githubAccessToken) {
     return
   }
 
   if (!process.browser) {
     const url = `https://api.github.com/user`
-    const headers = { Authorization: `token ${githubToken}` }
+    const headers = { Authorization: `token ${githubAccessToken}` }
     const options = { headers }
     const result = await request.get(url, options)
 
@@ -21,8 +21,8 @@ const getGithubUser = async githubToken => {
 const InjectGithubUser = Page => {
   return class InjectGithubUserWrapper extends Component {
     static async getInitialProps (context) {
-      const { githubToken } = context
-      const githubUser = await getGithubUser(githubToken)
+      const { githubAccessToken } = context
+      const githubUser = await getGithubUser(githubAccessToken)
       const pageProps = Page.getInitialProps
         ? await Page.getInitialProps({ ...context, githubUser })
         : {}

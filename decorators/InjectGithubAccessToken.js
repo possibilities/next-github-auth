@@ -1,6 +1,6 @@
 import { Component } from 'react'
 
-const getGithubToken = req => {
+const getGithubAccessToken = req => {
   if (!process.browser) {
     return req.headers.cookie && req.headers.cookie
       .split(';')
@@ -10,24 +10,24 @@ const getGithubToken = req => {
       .pop()
   }
 
-  return window.___nextGithubToken
+  return window.___nextGithubAccessToken
 }
 
-const InjectGithubToken = Page => {
+const InjectGithubAccessToken = Page => {
   return class InjectTokenWrapper extends Component {
     static async getInitialProps (context) {
       const { req } = context
-      const githubToken = getGithubToken(req)
+      const githubAccessToken = getGithubAccessToken(req)
       const pageProps = Page.getInitialProps
-        ? await Page.getInitialProps({ ...context, githubToken })
+        ? await Page.getInitialProps({ ...context, githubAccessToken })
         : {}
-      return { ...pageProps, githubToken }
+      return { ...pageProps, githubAccessToken }
     }
 
     constructor (props) {
       super(props)
       if (process.browser) {
-        window.___nextGithubToken = props.githubToken
+        window.___nextGithubAccessToken = props.githubAccessToken
       }
     }
 
@@ -37,4 +37,4 @@ const InjectGithubToken = Page => {
   }
 }
 
-export default InjectGithubToken
+export default InjectGithubAccessToken

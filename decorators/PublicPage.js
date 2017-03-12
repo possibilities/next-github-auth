@@ -1,9 +1,9 @@
 import compose from '../modules/compose'
 
 import InjectEnv from '../decorators/InjectEnv'
-import InjectGithubToken from '../decorators/InjectGithubToken'
+import InjectGithubAccessToken from '../decorators/InjectGithubAccessToken'
 import InjectGithubUser from '../decorators/InjectGithubUser'
 
-const PublicPage = compose(InjectEnv, InjectGithubToken, InjectGithubUser)
+const PublicPage = compose(InjectEnv, InjectGithubAccessToken, InjectGithubUser)
 
 export default PublicPage
