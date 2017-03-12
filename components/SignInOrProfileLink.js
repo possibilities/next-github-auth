@@ -7,8 +7,8 @@ const styles = {
   top: 10,
 }
 
-export default ({ isSignedIn }) => (
+export default ({ isSignedIn, ...otherProps }) => (
   <div style={styles}>
-    {isSignedIn ? <ProfileLink /> : <SignInLink />}
+    {isSignedIn ? <ProfileLink {...otherProps} /> : <SignInLink {...otherProps} />}
   </div>
 )
