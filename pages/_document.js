@@ -15,7 +15,7 @@ class Root extends Document {
     return (
       <html>
         <Head>
-          <title>Github auth example</title>
+          <title>Next Github auth example</title>
           <script
             dangerouslySetInnerHTML={{
               __html: `window.___nextEnv = ${JSON.stringify(this.props.env)}`
