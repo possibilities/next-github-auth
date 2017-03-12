@@ -1,8 +1,6 @@
 import Navigation from '../components/Navigation'
 import SignInOrProfileLink from '../components/SignInOrProfileLink'
-import InjectEnv from '../decorators/InjectEnv'
-import InjectGithubToken from '../decorators/InjectGithubToken'
-import InjectGithubUser from '../decorators/InjectGithubUser'
+import PublicPage from '../decorators/PublicPage'
 
 const Public = ({
   githubClientId,
@@ -26,4 +24,4 @@ const Public = ({
   </div>
 )
 
-export default InjectEnv(InjectGithubToken(InjectGithubUser(Public)))
+export default PublicPage(Public)

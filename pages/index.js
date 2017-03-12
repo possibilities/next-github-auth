@@ -1,32 +1,28 @@
 import Navigation from '../components/Navigation'
 import SignInOrProfileLink from '../components/SignInOrProfileLink'
-import InjectEnv from '../decorators/InjectEnv'
-import InjectGithubToken from '../decorators/InjectGithubToken'
-import InjectGithubUser from '../decorators/InjectGithubUser'
+import PublicPage from '../decorators/PublicPage'
 
 const Home = ({
   githubUser,
   githubToken,
   githubClientId
-}) => {
-  return (
-    <div>
-      <Navigation />
+}) => (
+  <div>
+    <Navigation />
 
-      <SignInOrProfileLink
-        githubUser={githubUser}
-        githubClientId={githubClientId} />
+    <SignInOrProfileLink
+      githubUser={githubUser}
+      githubClientId={githubClientId} />
 
-      <br />
+    <br />
 
-      <div>home page!</div>
+    <div>home page!</div>
 
-      <br />
+    <br />
 
-      {githubToken && <div>token: {githubToken}</div>}
-      {githubUser && <div>user: {githubUser.login}</div>}
-    </div>
-  )
-}
+    {githubToken && <div>token: {githubToken}</div>}
+    {githubUser && <div>user: {githubUser.login}</div>}
+  </div>
+)
 
-export default InjectEnv(InjectGithubToken(InjectGithubUser(Home)))
+export default PublicPage(Home)
