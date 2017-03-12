@@ -39,7 +39,7 @@ The example app is deployed to [https://next-github-auth-example.now.sh](https:/
 
 ## Deploy
 
-Deploy to now [now](https://now.sh)
+Deploy to [now](https://now.sh)
 
 ```
 now secret add next-github-id YOUR_APP_ID
