@@ -6,16 +6,28 @@ const getGithubUser = async githubAccessToken => {
     return
   }
 
-  if (!process.browser) {
-    const url = `https://api.github.com/user`
-    const headers = { Authorization: `token ${githubAccessToken}` }
-    const options = { headers }
-    const result = await request.get(url, options)
-
-    return result.data
+  if (process.browser) {
+    return window.___nextGithubUser
   }
 
-  return window.___nextGithubUser
+  const url = `https://api.github.com/user`
+  const headers = { Authorization: `token ${githubAccessToken}` }
+  const options = { headers }
+
+  let result
+  try {
+    result = await request.get(url, options)
+  } catch (error) {
+    // If there's an invalid token here ignore and allow the user to
+    // go through normal auth flow
+    if (error.response.status !== 401) {
+      throw error
+    }
+  }
+
+  if (result) {
+    return result.data
+  }
 }
 
 const InjectGithubUser = Page => {
