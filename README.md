@@ -4,6 +4,10 @@ A [Next.js](https://github.com/zeit/next.js) example using [Github](https://gith
 
 [![CircleCI](https://circleci.com/gh/possibilities/next-github-auth-example.svg?style=svg)](https://circleci.com/gh/possibilities/next-github-auth-example)
 
+
+![screen](https://raw.githubusercontent.com/possibilities/next-github-auth-example/master/screen.gif "screen")
+
+
 ## Usage
 
 1. Install
