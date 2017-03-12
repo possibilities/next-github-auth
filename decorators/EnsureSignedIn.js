@@ -1,9 +1,24 @@
 import { Component } from 'react'
 import getGithubAuthorizeUrl from '../modules/getGithubAuthorizeUrl'
+import getGithubAccessTokenCookie
+  from '../modules/getGithubAccessTokenCookie'
 
 const EnsureSignedIn = Page => {
   return class EnsureSignedInWrapper extends Component {
     static async getInitialProps (context) {
+      if (!process.browser && !context.githubUser) {
+        const { req, res, githubClientId } = context
+
+        const githubAccessTokenCookie =
+          getGithubAccessTokenCookie(req, '')
+
+        res.writeHead(302, {
+          'Set-Cookie': githubAccessTokenCookie,
+          Location: getGithubAuthorizeUrl(githubClientId)
+        })
+        return res.end()
+      }
+
       return Page.getInitialProps
         ? await Page.getInitialProps(context)
         : {}
