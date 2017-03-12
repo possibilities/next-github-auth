@@ -36,12 +36,12 @@ class SignIn extends Component {
       if (accessToken) {
         res.setHeader(
           'Set-Cookie',
-          `githubAccessToken=${accessToken}; SameSite=Strict`
+          `githubAccessToken=${accessToken}; SameSite=Strict; HttpOnly`
         )
       } else {
         // TODO figure out UX for failed sign in
         res.setHeader(
-          'Set-Cookie', `githubAccessToken=; SameSite=Strict`
+          'Set-Cookie', `githubAccessToken=; SameSite=Strict; HttpOnly`
         )
       }
     }

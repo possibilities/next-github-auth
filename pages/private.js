@@ -1,10 +1,12 @@
 import Navigation from '../components/Navigation'
 import SignInOrProfileLink from '../components/SignInOrProfileLink'
 import InjectEnv from '../pageWrappers/InjectEnv'
+import InjectGithubToken from '../pageWrappers/InjectGithubToken'
 
-const Private = ({ isSignedIn, githubClientId }) => {
+const Private = ({ isSignedIn, githubClientId, githubToken }) => {
   return (
     <div>
+      hi: {githubToken}
       <Navigation />
       <SignInOrProfileLink
         isSignedIn={isSignedIn}
@@ -15,4 +17,4 @@ const Private = ({ isSignedIn, githubClientId }) => {
   )
 }
 
-export default InjectEnv(Private)
+export default InjectEnv(InjectGithubToken(Private))

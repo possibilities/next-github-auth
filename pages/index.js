@@ -2,11 +2,13 @@ import { Component } from 'react'
 import Navigation from '../components/Navigation'
 import SignInOrProfileLink from '../components/SignInOrProfileLink'
 import InjectEnv from '../pageWrappers/InjectEnv'
+import InjectGithubToken from '../pageWrappers/InjectGithubToken'
 
 class Home extends Component {
   render() {
     return (
       <div>
+        hi: {this.props.githubToken}
         <Navigation />
         <SignInOrProfileLink
           isSignedIn={this.props.isSignedIn}
@@ -18,4 +20,4 @@ class Home extends Component {
   }
 }
 
-export default InjectEnv(Home)
+export default InjectEnv(InjectGithubToken(Home))
