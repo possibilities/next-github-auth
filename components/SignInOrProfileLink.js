@@ -1,3 +1,4 @@
+import { PropTypes } from 'react'
 import ProfileLink from './ProfileLink'
 import SignInLink from './SignInLink'
 
@@ -7,7 +8,7 @@ const styles = {
   top: 10
 }
 
-export default ({ githubUser, githubClientId }) => (
+const SignInOrProfileLink = ({ githubUser, githubClientId }) => (
   <div style={styles}>
     {githubUser
       ? <ProfileLink githubUser={githubUser} />
@@ -15,3 +16,12 @@ export default ({ githubUser, githubClientId }) => (
     }
   </div>
 )
+
+SignInOrProfileLink.propTypes = {
+  githubUser: PropTypes.shape({
+    login: PropTypes.string.isRequired
+  }),
+  githubClientId: PropTypes.string.isRequired
+}
+
+export default SignInOrProfileLink

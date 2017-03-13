@@ -1,3 +1,4 @@
+import { PropTypes } from 'react'
 import getGithubAuthorizeUrl from '../modules/getGithubAuthorizeUrl'
 
 const handleSignIn = githubClientId => event => {
@@ -5,6 +6,12 @@ const handleSignIn = githubClientId => event => {
   event.preventDefault()
 }
 
-export default ({ githubClientId }) => (
+const SignInLink = ({ githubClientId }) => (
   <a href='#' onClick={handleSignIn(githubClientId)}>sign in</a>
 )
+
+SignInLink.propTypes = {
+  githubClientId: PropTypes.string.isRequired
+}
+
+export default SignInLink

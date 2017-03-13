@@ -1,3 +1,4 @@
+import { PropTypes } from 'react'
 import PrivateLink from './PrivateLink'
 import Link from 'next/link'
 
@@ -43,6 +44,13 @@ const Navigation = ({
       </ul>
     </div>
   )
+}
+
+Navigation.propTypes = {
+  githubUser: PropTypes.shape({
+    login: PropTypes.string.isRequired
+  }),
+  githubClientId: PropTypes.string.isRequired
 }
 
 export default Navigation
