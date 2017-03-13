@@ -2,6 +2,7 @@ import { Component, PropTypes } from 'react'
 import getGithubAuthorizeUrl from '../modules/getGithubAuthorizeUrl'
 import getGithubAccessTokenCookie
   from '../modules/getGithubAccessTokenCookie'
+import Router from 'next/router'
 
 const EnsureSignedIn = Page => {
   return class EnsureSignedInWrapper extends Component {
@@ -40,7 +41,7 @@ const EnsureSignedIn = Page => {
 
     componentWillReceiveProps (nextProps) {
       if (process.browser && !nextProps.githubUser) {
-        window.location = '/'
+        Router.push('/')
       }
     }
 
