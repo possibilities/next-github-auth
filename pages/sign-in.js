@@ -2,7 +2,7 @@ import { Component, PropTypes } from 'react'
 import request from 'axios'
 import assertEnvVar from '../modules/assertEnvVar'
 import getGithubAccessTokenCookie from '../modules/getGithubAccessTokenCookie'
-import InjectEnv from '../decorators/InjectEnv'
+import InjectEnvVars from '../decorators/InjectEnvVars'
 import Navigation from '../components/Navigation'
 
 const githubAccessTokenUrl = 'https://github.com/login/oauth/access_token'
@@ -89,4 +89,8 @@ class SignIn extends Component {
   }
 }
 
-export default InjectEnv(SignIn)
+const injectGithubClientId = InjectEnvVars({
+  GITHUB_CLIENT_ID: 'githubClientId'
+})
+
+export default injectGithubClientId(SignIn)

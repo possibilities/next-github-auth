@@ -1,12 +1,23 @@
 import { Component } from 'react'
 import NextGlobalClientStore from '../modules/NextGlobalClientStore'
 
-const InjectEnv = Page => {
-  return class InjectEnvWrapper extends Component {
+const getEnvironment = namesToAliases => {
+  let environment = {}
+  Object.keys(namesToAliases).forEach(key => {
+    const value = process.env[key]
+    const alias = namesToAliases[key]
+    environment[alias] = value
+  })
+
+  return environment
+}
+
+const InjectEnvVars = namesToAliases => Page => {
+  return class InjectEnvVarsWrapper extends Component {
     static async getInitialProps (context) {
       const env = process.browser
         ? NextGlobalClientStore.get('env')
-        : { githubClientId: process.env.GITHUB_CLIENT_ID }
+        : getEnvironment(namesToAliases)
 
       const pageProps = Page.getInitialProps
         ? await Page.getInitialProps({ ...context, env })
@@ -28,4 +39,4 @@ const InjectEnv = Page => {
   }
 }
 
-export default InjectEnv
+export default InjectEnvVars
