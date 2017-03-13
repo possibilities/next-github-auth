@@ -1,10 +1,17 @@
-import { Component } from 'react'
+import { Component, PropTypes } from 'react'
 import getGithubAuthorizeUrl from '../modules/getGithubAuthorizeUrl'
 import getGithubAccessTokenCookie
   from '../modules/getGithubAccessTokenCookie'
 
 const EnsureSignedIn = Page => {
   return class EnsureSignedInWrapper extends Component {
+    static propTypes = {
+      githubUser: PropTypes.shape({
+        login: PropTypes.string.isRequired
+      }).isRequired,
+      githubClientId: PropTypes.string.isRequired
+    }
+
     static async getInitialProps (context) {
       if (!process.browser && !context.githubUser) {
         const { req, res, githubClientId } = context

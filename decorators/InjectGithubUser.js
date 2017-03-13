@@ -1,4 +1,4 @@
-import { Component } from 'react'
+import { Component, PropTypes } from 'react'
 import request from 'axios'
 
 const getGithubUser = async githubAccessToken => {
@@ -32,6 +32,12 @@ const getGithubUser = async githubAccessToken => {
 
 const InjectGithubUser = Page => {
   return class InjectGithubUserWrapper extends Component {
+    static propTypes = {
+      githubUser: PropTypes.shape({
+        login: PropTypes.string.isRequired
+      })
+    }
+
     static async getInitialProps (context) {
       const { githubAccessToken } = context
       const githubUser = await getGithubUser(githubAccessToken)

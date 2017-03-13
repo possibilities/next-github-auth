@@ -1,3 +1,4 @@
+import { PropTypes } from 'react'
 import Link from 'next/link'
 import getGithubAuthorizeUrl from '../modules/getGithubAuthorizeUrl'
 
@@ -21,5 +22,13 @@ const PrivateLink = ({
       </a>
     )
 )
+
+PrivateLink.propTypes = {
+  href: PropTypes.string.isRequired,
+  githubUser: PropTypes.shape({
+    login: PropTypes.string.isRequired
+  }),
+  githubClientId: PropTypes.string.isRequired
+}
 
 export default PrivateLink
