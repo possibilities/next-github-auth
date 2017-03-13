@@ -2,6 +2,7 @@ import { Component } from 'react'
 
 const getGithubAccessToken = req => {
   if (process.browser) {
+    window.___nextJsData || (window.___nextJsData = {})
     return window.___nextJsData.githubAccessToken
   } else {
     return req.headers.cookie && req.headers.cookie
@@ -27,6 +28,7 @@ const InjectGithubAccessToken = Page => {
     constructor (props) {
       super(props)
       if (process.browser) {
+        window.___nextJsData || (window.___nextJsData = {})
         window.___nextJsData.githubAccessToken = props.githubAccessToken
       }
     }

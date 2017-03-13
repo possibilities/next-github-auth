@@ -7,6 +7,7 @@ const getGithubUser = async githubAccessToken => {
   }
 
   if (process.browser) {
+    window.___nextJsData || (window.___nextJsData = {})
     return window.___nextJsData.githubUser
   }
 
@@ -55,6 +56,7 @@ const InjectGithubUser = Page => {
       }
 
       if (process.browser) {
+        window.___nextJsData || (window.___nextJsData = {})
         window.___nextJsData.githubUser = props.githubUser
       }
     }
