@@ -1,7 +1,9 @@
 import { Component } from 'react'
 
 const getGithubAccessToken = req => {
-  if (!process.browser) {
+  if (process.browser) {
+    return window.___nextJsData.githubAccessToken
+  } else {
     return req.headers.cookie && req.headers.cookie
       .split(';')
       .map(c => c.trim())
@@ -9,12 +11,10 @@ const getGithubAccessToken = req => {
       .split('=')
       .pop()
   }
-
-  return window.___nextGithubAccessToken
 }
 
 const InjectGithubAccessToken = Page => {
-  return class InjectTokenWrapper extends Component {
+  return class InjectGithubAccessTokenWrapper extends Component {
     static async getInitialProps (context) {
       const { req } = context
       const githubAccessToken = getGithubAccessToken(req)
@@ -27,7 +27,7 @@ const InjectGithubAccessToken = Page => {
     constructor (props) {
       super(props)
       if (process.browser) {
-        window.___nextGithubAccessToken = props.githubAccessToken
+        window.___nextJsData.githubAccessToken = props.githubAccessToken
       }
     }
 
