@@ -1,4 +1,4 @@
-# Next github auth example
+# Next.js with Github auth example
 
 A [Next.js](https://github.com/zeit/next.js) example using [Github](https://github.com) authentication
 
