@@ -1,5 +1,6 @@
 import { Component, PropTypes } from 'react'
 import request from 'axios'
+import NextGlobalClientStore from '../modules/NextGlobalClientStore'
 
 const getGithubUser = async githubAccessToken => {
   if (!githubAccessToken) {
@@ -7,7 +8,7 @@ const getGithubUser = async githubAccessToken => {
   }
 
   if (process.browser) {
-    return window.___nextJsData.githubUser
+    return NextGlobalClientStore.get('githubUser')
   }
 
   const url = `https://api.github.com/user`
@@ -55,7 +56,7 @@ const InjectGithubUser = Page => {
       }
 
       if (process.browser) {
-        window.___nextJsData.githubUser = props.githubUser
+        NextGlobalClientStore.set('githubUser', props.githubUser)
       }
     }
 

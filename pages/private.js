@@ -24,7 +24,9 @@ class Private extends Component {
     githubUser: PropTypes.shape({
       login: PropTypes.string.isRequired
     }).isRequired,
-    githubClientId: PropTypes.string.isRequired
+    env: PropTypes.shape({
+      githubClientId: PropTypes.string.isRequired
+    }).isRequired
   }
 
   static async getInitialProps (context) {
@@ -34,7 +36,7 @@ class Private extends Component {
   }
 
   render () {
-    const { githubClientId, githubUser, repos } = this.props
+    const { env: { githubClientId }, githubUser, repos } = this.props
 
     return (
       <div>

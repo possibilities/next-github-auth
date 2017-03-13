@@ -4,7 +4,7 @@ import SignInOrProfileLink from '../components/SignInOrProfileLink'
 import PublicPage from '../decorators/PublicPage'
 
 const Public = ({
-  githubClientId,
+  env: { githubClientId },
   githubUser
 }) => (
   <div>
@@ -25,7 +25,9 @@ Public.propTypes = {
   githubUser: PropTypes.shape({
     login: PropTypes.string.isRequired
   }),
-  githubClientId: PropTypes.string
+  env: PropTypes.shape({
+    githubClientId: PropTypes.string.isRequired
+  }).isRequired
 }
 
 export default PublicPage(Public)

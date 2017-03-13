@@ -10,12 +10,16 @@ const EnsureSignedIn = Page => {
       githubUser: PropTypes.shape({
         login: PropTypes.string.isRequired
       }).isRequired,
-      githubClientId: PropTypes.string.isRequired
+      env: PropTypes.shape({
+        githubClientId: PropTypes.string.isRequired
+      }).isRequired
     }
 
     static async getInitialProps (context) {
+      const { req, res, env } = context
+
       if (!process.browser && !context.githubUser) {
-        const { req, res, githubClientId } = context
+        const { githubClientId } = env
 
         const githubAccessTokenCookie =
           getGithubAccessTokenCookie(req, '')
@@ -27,15 +31,17 @@ const EnsureSignedIn = Page => {
         return res.end()
       }
 
-      return Page.getInitialProps
+      const pageProps = Page.getInitialProps
         ? await Page.getInitialProps(context)
         : {}
+
+      return { ...pageProps, env }
     }
 
     constructor (props) {
       super(props)
       if (process.browser && !props.githubUser) {
-        window.location = getGithubAuthorizeUrl(props.githubClientId)
+        window.location = getGithubAuthorizeUrl(props.env.githubClientId)
       }
     }
 

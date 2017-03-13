@@ -4,6 +4,7 @@ import assertEnvVar from '../modules/assertEnvVar'
 import getGithubAccessTokenCookie from '../modules/getGithubAccessTokenCookie'
 import InjectEnv from '../decorators/InjectEnv'
 import Navigation from '../components/Navigation'
+
 const githubAccessTokenUrl = 'https://github.com/login/oauth/access_token'
 const githubClientSecret = assertEnvVar('GITHUB_CLIENT_SECRET')
 
@@ -25,7 +26,10 @@ class SignIn extends Component {
     githubUser: PropTypes.shape({
       login: PropTypes.string.isRequired
     }),
-    githubClientId: PropTypes.string
+    githubClientId: PropTypes.string,
+    env: PropTypes.shape({
+      githubClientId: PropTypes.string.isRequired
+    }).isRequired
   }
 
   static async getInitialProps (context) {
@@ -33,7 +37,7 @@ class SignIn extends Component {
       req,
       res,
       query,
-      githubClientId
+      env: { githubClientId }
     } = context
 
     if (!process.browser) {
@@ -66,11 +70,16 @@ class SignIn extends Component {
   }
 
   render () {
+    const {
+      githubUser,
+      env: { githubClientId }
+    } = this.props
+
     return (
       <div>
         <Navigation
-          githubUser={this.props.githubUser}
-          githubClientId={this.props.githubClientId} />
+          githubUser={githubUser}
+          githubClientId={githubClientId} />
 
         <br />
 

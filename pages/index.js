@@ -5,7 +5,7 @@ import PublicPage from '../decorators/PublicPage'
 
 const Home = ({
   githubUser,
-  githubClientId
+  env: { githubClientId }
 }) => (
   <div>
     <Navigation
@@ -26,7 +26,9 @@ Home.propTypes = {
   githubUser: PropTypes.shape({
     login: PropTypes.string.isRequired
   }),
-  githubClientId: PropTypes.string.isRequired
+  env: PropTypes.shape({
+    githubClientId: PropTypes.string.isRequired
+  }).isRequired
 }
 
 export default PublicPage(Home)
