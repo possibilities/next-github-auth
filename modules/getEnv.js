@@ -1,4 +1,5 @@
 import assertEnvVar from '../modules/assertEnvVar'
+import NextGlobalClientData from '../modules/NextGlobalClientData'
 
 const getEnv = () => {
   // Accumulate the data server side
@@ -8,7 +9,7 @@ const getEnv = () => {
   }
 
   // On the client grab it from a global
-  return window.___nextEnv
+  return NextGlobalClientData.get('env')
 }
 
 export default getEnv
