@@ -4,7 +4,6 @@ import getGithubAuthorizeUrl from '../modules/getGithubAuthorizeUrl'
 
 const handleClick = (githubClientId, href) => event => {
   event.preventDefault()
-
   window.location = getGithubAuthorizeUrl(githubClientId, href)
 }
 
@@ -25,6 +24,7 @@ const PrivateLink = ({
 
 PrivateLink.propTypes = {
   href: PropTypes.string.isRequired,
+  children: PropTypes.string.isRequired,
   githubUser: PropTypes.shape({
     login: PropTypes.string.isRequired
   }),
