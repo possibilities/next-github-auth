@@ -50,11 +50,19 @@ class Private extends Component {
 
         <div>private page!</div>
 
-        <ul>
-          {repos.map(({ fullName }) => (
-            <li key={fullName}>{fullName}</li>
-          ))}
-        </ul>
+        <br />
+
+        {!repos.length && (
+          <div>cool, you have 0 repos!</div>
+        )}
+
+        {!!repos.length && (
+          <ul style={{ margin: 0 }}>
+            {repos.map(({ fullName }) => (
+              <li key={fullName}>{fullName}</li>
+            ))}
+          </ul>
+        )}
       </div>
     )
   }
