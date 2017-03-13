@@ -1,15 +1,12 @@
 import { Component } from 'react'
+import NextGlobalClientStore from '../modules/NextGlobalClientStore'
 
 const InjectEnv = Page => {
   return class InjectEnvWrapper extends Component {
     static async getInitialProps (context) {
-      let env
-      if (process.browser) {
-        window.___nextJsData || (window.___nextJsData = {})
-        env = window.___nextJsData.env
-      } else {
-        env = { githubClientId: process.env.GITHUB_CLIENT_ID }
-      }
+      const env = process.browser
+        ? NextGlobalClientStore.get('env')
+        : { githubClientId: process.env.GITHUB_CLIENT_ID }
 
       const pageProps = Page.getInitialProps
         ? await Page.getInitialProps({ ...context, env })
@@ -21,8 +18,7 @@ const InjectEnv = Page => {
     constructor (props) {
       super(props)
       if (process.browser) {
-        window.___nextJsData || (window.___nextJsData = {})
-        window.___nextJsData.env = props.env
+        NextGlobalClientStore.set('env', props.env)
       }
     }
 

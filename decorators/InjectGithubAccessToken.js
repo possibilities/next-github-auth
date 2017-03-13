@@ -1,9 +1,9 @@
 import { Component } from 'react'
+import NextGlobalClientStore from '../modules/NextGlobalClientStore'
 
 const getGithubAccessToken = req => {
   if (process.browser) {
-    window.___nextJsData || (window.___nextJsData = {})
-    return window.___nextJsData.githubAccessToken
+    return NextGlobalClientStore.get('githubAccessToken')
   } else {
     return req.headers.cookie && req.headers.cookie
       .split(';')
@@ -28,8 +28,7 @@ const InjectGithubAccessToken = Page => {
     constructor (props) {
       super(props)
       if (process.browser) {
-        window.___nextJsData || (window.___nextJsData = {})
-        window.___nextJsData.githubAccessToken = props.githubAccessToken
+        NextGlobalClientStore.set('githubAccessToken', props.githubAccessToken)
       }
     }
 
