@@ -1,4 +1,4 @@
-import { Component } from 'react'
+import { Component, PropTypes } from 'react'
 import request from 'axios'
 import assertEnvVar from '../modules/assertEnvVar'
 import getGithubAccessTokenCookie from '../modules/getGithubAccessTokenCookie'
@@ -21,6 +21,13 @@ const fetchGithubAccessToken = async (code, githubClientId) => {
 }
 
 class SignIn extends Component {
+  static propTypes = {
+    githubUser: PropTypes.shape({
+      login: PropTypes.string.isRequired
+    }),
+    githubClientId: PropTypes.string
+  }
+
   static async getInitialProps (context) {
     const {
       req,

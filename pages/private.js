@@ -1,4 +1,4 @@
-import { Component } from 'react'
+import { Component, PropTypes } from 'react'
 import Navigation from '../components/Navigation'
 import SignInOrProfileLink from '../components/SignInOrProfileLink'
 import PrivatePage from '../decorators/PrivatePage'
@@ -13,10 +13,23 @@ const getGithubRepos = async githubAccessToken => {
   return result.data.slice(0, 3)
 }
 
+const repoView = ({ full_name }) => ({ fullName: full_name })
+
 class Private extends Component {
+  static propTypes = {
+    repos: PropTypes.arrayOf(PropTypes.shape({
+      fullName: PropTypes.string.isRequired
+    })).isRequired,
+    githubUser: PropTypes.shape({
+      login: PropTypes.string.isRequired
+    }).isRequired,
+    githubClientId: PropTypes.string.isRequired
+  }
+
   static async getInitialProps (context) {
     const { githubAccessToken } = context
-    return { repos: await getGithubRepos(githubAccessToken) }
+    const repos = (await getGithubRepos(githubAccessToken)).map(repoView)
+    return { repos }
   }
 
   render () {
@@ -37,7 +50,7 @@ class Private extends Component {
         <div>private page!</div>
 
         <ul>
-          {repos.map(({ full_name: fullName }) => (
+          {repos.map(({ fullName }) => (
             <li key={fullName}>{fullName}</li>
           ))}
         </ul>
