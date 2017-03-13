@@ -1,4 +1,5 @@
 import { Component } from 'react'
+import NextGlobalClientData from '../modules/NextGlobalClientData'
 
 const getGithubAccessToken = req => {
   if (!process.browser) {
@@ -10,7 +11,7 @@ const getGithubAccessToken = req => {
       .pop()
   }
 
-  return window.___nextGithubAccessToken
+  return NextGlobalClientData.get('githubAccessToken')
 }
 
 const InjectGithubAccessToken = Page => {
@@ -27,7 +28,7 @@ const InjectGithubAccessToken = Page => {
     constructor (props) {
       super(props)
       if (process.browser) {
-        window.___nextGithubAccessToken = props.githubAccessToken
+        NextGlobalClientData.set('githubAccessToken', props.githubAccessToken)
       }
     }
 

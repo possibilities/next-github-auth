@@ -15,7 +15,11 @@ const PrivateLink = ({
   githubClientId
 }) => (
   githubUser
-    ? <Link href={href}><a>{children}</a></Link>
+    ? (
+      <Link href={href}>
+        <a>{children}</a>
+      </Link>
+    )
     : (
       <a href='#' onClick={handleClick(githubClientId, href)}>
         {children}
