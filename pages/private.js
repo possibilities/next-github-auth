@@ -7,7 +7,8 @@ import request from 'axios'
 const getGithubRepos = async githubAccessToken => {
   const url = `https://api.github.com/user/repos`
   const headers = { Authorization: `token ${githubAccessToken}` }
-  const options = { headers }
+  const params = { type: 'owner', sort: 'updated' }
+  const options = { headers, params }
 
   const result = await request.get(url, options)
   return result.data.slice(0, 3)
