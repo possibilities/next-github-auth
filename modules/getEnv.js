@@ -8,7 +8,7 @@ const getEnv = () => {
   }
 
   // On the client grab it from a global
-  return window.___nextEnv
+  return window.___nextJsData.env
 }
 
 export default getEnv

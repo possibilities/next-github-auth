@@ -12,13 +12,15 @@ class Root extends Document {
   }
 
   render () {
+    const { env } = this.props
+
     return (
       <html>
         <Head>
           <title>Next Github auth example</title>
           <script
             dangerouslySetInnerHTML={{
-              __html: `window.___nextEnv = ${JSON.stringify(this.props.env)}`
+              __html: `window.___nextJsData = ${JSON.stringify({ env })}`
             }}
           />
           <link rel='stylesheet' href={resetCssUrl} />

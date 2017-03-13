@@ -7,7 +7,7 @@ const getGithubUser = async githubAccessToken => {
   }
 
   if (process.browser) {
-    return window.___nextGithubUser
+    return window.___nextJsData.githubUser
   }
 
   const url = `https://api.github.com/user`
@@ -55,7 +55,7 @@ const InjectGithubUser = Page => {
       }
 
       if (process.browser) {
-        window.___nextGithubUser = props.githubUser
+        window.___nextJsData.githubUser = props.githubUser
       }
     }
 
