@@ -1,6 +1,6 @@
 import { PropTypes, Children, cloneElement } from 'react'
 import Link from 'next/link'
-import getGithubAuthorizeUrl from '../src/modules/getGithubAuthorizeUrl'
+import getGithubAuthorizeUrl from '../modules/getGithubAuthorizeUrl'
 
 const handleClick = (githubClientId, href) => event => {
   event.preventDefault()

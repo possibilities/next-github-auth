@@ -1,5 +1,5 @@
 import { PropTypes } from 'react'
-import PrivateLink from './PrivateLink'
+import PrivateLink from '../src/components/PrivateLink'
 import Link from 'next/link'
 
 const Navigation = ({
