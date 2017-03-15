@@ -3,7 +3,6 @@ import request from 'axios'
 import assertEnvVar from '../modules/assertEnvVar'
 import getGithubAccessTokenCookie from '../modules/getGithubAccessTokenCookie'
 import InjectEnvVars from '../decorators/InjectEnvVars'
-import Navigation from '../components/Navigation'
 
 const githubAccessTokenUrl = 'https://github.com/login/oauth/access_token'
 const githubClientSecret = assertEnvVar('GITHUB_CLIENT_SECRET')
@@ -36,22 +35,14 @@ class SignIn extends Component {
     const {
       req,
       res,
-      query,
+      query: { code, nextUrl },
       env: { githubClientId }
     } = context
 
     if (!process.browser) {
-      const { code, nextUrl } = query
-      const accessToken =
-        await fetchGithubAccessToken(code, githubClientId)
-
-      let githubAccessTokenCookie
-      if (accessToken) {
-        githubAccessTokenCookie =
-          githubAccessTokenCookie = getGithubAccessTokenCookie(req, accessToken)
-      } else {
-        githubAccessTokenCookie = getGithubAccessTokenCookie(req, '')
-      }
+      const accessToken = await fetchGithubAccessToken(code, githubClientId)
+      const githubAccessTokenCookie =
+        getGithubAccessTokenCookie(req, accessToken || '')
 
       res.setHeader('Set-Cookie', githubAccessTokenCookie)
 
@@ -70,22 +61,8 @@ class SignIn extends Component {
   }
 
   render () {
-    const {
-      githubUser,
-      env: { githubClientId }
-    } = this.props
-
-    return (
-      <div>
-        <Navigation
-          githubUser={githubUser}
-          githubClientId={githubClientId} />
-
-        <br />
-
-        <div>Sign in with GitHub was successful! Redirecting...</div>
-      </div>
-    )
+    // All server side, nothing to show
+    return null
   }
 }
 
