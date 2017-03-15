@@ -18,7 +18,7 @@ class Root extends Document {
           <link rel='stylesheet' href={resetCssUrl} />
         </Head>
 
-        <body style={{ margin: 10 }}>
+        <body style={{ margin: 20 }}>
           <Main />
           <NextScript />
         </body>
