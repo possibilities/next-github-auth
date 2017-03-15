@@ -1,5 +1,5 @@
 import { Component } from 'react'
-import getGithubAccessTokenCookie from '../../modules/getGithubAccessTokenCookie'
+import getGithubAccessTokenCookie from '../modules/getGithubAccessTokenCookie'
 
 export default class SignOutPage extends Component {
   static getInitialProps ({ req, res }) {

@@ -1,7 +1,6 @@
 import { Component, PropTypes } from 'react'
-import getGithubAuthorizeUrl from '../../modules/getGithubAuthorizeUrl'
-import getGithubAccessTokenCookie
-  from '../../modules/getGithubAccessTokenCookie'
+import getGithubAuthorizeUrl from '../modules/getGithubAuthorizeUrl'
+import getGithubAccessTokenCookie from '../modules/getGithubAccessTokenCookie'
 import Router from 'next/router'
 
 const EnsureSignedIn = Page => {

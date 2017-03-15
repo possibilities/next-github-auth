@@ -1,5 +1,5 @@
 import { PropTypes } from 'react'
-import getGithubAuthorizeUrl from '../modules/getGithubAuthorizeUrl'
+import getGithubAuthorizeUrl from '../src/modules/getGithubAuthorizeUrl'
 
 const handleSignIn = githubClientId => event => {
   window.location = getGithubAuthorizeUrl(githubClientId)
