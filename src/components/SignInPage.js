@@ -2,7 +2,7 @@ import { Component, PropTypes } from 'react'
 import request from 'axios'
 import assertEnvVar from '../../modules/assertEnvVar'
 import getGithubAccessTokenCookie from '../../modules/getGithubAccessTokenCookie'
-import InjectEnvVars from '../../decorators/InjectEnvVars'
+import InjectEnvVars from '../decorators/InjectEnvVars'
 
 const githubAccessTokenUrl = 'https://github.com/login/oauth/access_token'
 const githubClientSecret = assertEnvVar('GITHUB_CLIENT_SECRET')

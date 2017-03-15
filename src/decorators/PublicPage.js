@@ -1,4 +1,4 @@
-import compose from '../modules/compose'
+import compose from '../../modules/compose'
 
 import InjectEnvVars from '../decorators/InjectEnvVars'
 import InjectGithubUser from '../decorators/InjectGithubUser'

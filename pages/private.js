@@ -1,7 +1,7 @@
 import { Component, PropTypes } from 'react'
 import Navigation from '../components/Navigation'
 import SignInOrProfileLink from '../components/SignInOrProfileLink'
-import PrivatePage from '../decorators/PrivatePage'
+import PrivatePage from '../src/decorators/PrivatePage'
 import request from 'axios'
 
 const getGithubRepos = async githubAccessToken => {

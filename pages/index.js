@@ -1,7 +1,7 @@
 import { PropTypes } from 'react'
 import Navigation from '../components/Navigation'
 import SignInOrProfileLink from '../components/SignInOrProfileLink'
-import PublicPage from '../decorators/PublicPage'
+import PublicPage from '../src/decorators/PublicPage'
 
 const Home = ({
   githubUser,

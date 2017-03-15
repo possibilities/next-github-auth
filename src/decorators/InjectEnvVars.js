@@ -1,5 +1,5 @@
 import { Component } from 'react'
-import NextGlobalClientStore from '../modules/NextGlobalClientStore'
+import NextGlobalClientStore from '../../modules/NextGlobalClientStore'
 
 const getEnvironment = namesToAliases => {
   let environment = {}

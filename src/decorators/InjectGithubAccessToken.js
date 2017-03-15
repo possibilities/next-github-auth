@@ -1,5 +1,5 @@
 import { Component } from 'react'
-import NextGlobalClientStore from '../modules/NextGlobalClientStore'
+import NextGlobalClientStore from '../../modules/NextGlobalClientStore'
 
 const getGithubAccessToken = req => {
   if (process.browser) {
