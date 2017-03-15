@@ -38,7 +38,7 @@ const Navigation = ({
             githubUser={githubUser}
             githubClientId={githubClientId}>
 
-            private page
+            <a>private page</a>
           </PrivateLink>
         </li>
       </ul>
