@@ -4,8 +4,8 @@ import SignInLink from './SignInLink'
 
 const styles = {
   position: 'absolute',
-  right: 10,
-  top: 10
+  right: 20,
+  top: 20
 }
 
 const SignInOrProfileLink = ({ githubUser, githubClientId }) => (
