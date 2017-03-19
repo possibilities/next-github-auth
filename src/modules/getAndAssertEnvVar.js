@@ -1,4 +1,4 @@
-const assertEnvVar = envVarName => {
+const getAndAssertEnvVar = envVarName => {
   if (!process.browser && !process.env[envVarName]) {
     console.error(`${envVarName} environment variable is required`)
     process.exit(1)
@@ -7,4 +7,4 @@ const assertEnvVar = envVarName => {
   return process.env[envVarName]
 }
 
-export default assertEnvVar
+export default getAndAssertEnvVar

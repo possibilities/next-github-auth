@@ -1,10 +1,11 @@
 import { Component } from 'react'
 import NextGlobalClientStore from '../modules/NextGlobalClientStore'
+import getAndAssertEnvVar from '../modules/getAndAssertEnvVar'
 
-const getEnvironment = namesToAliases => {
+const loadEnvironmentVars = namesToAliases => {
   let environment = {}
   Object.keys(namesToAliases).forEach(key => {
-    const value = process.env[key]
+    const value = getAndAssertEnvVar(key)
     const alias = namesToAliases[key]
     environment[alias] = value
   })
@@ -17,7 +18,7 @@ const InjectEnvVars = namesToAliases => Page => {
     static async getInitialProps (context) {
       const env = process.browser
         ? NextGlobalClientStore.get('env')
-        : getEnvironment(namesToAliases)
+        : loadEnvironmentVars(namesToAliases)
 
       const pageProps = Page.getInitialProps
         ? await Page.getInitialProps({ ...context, env })
