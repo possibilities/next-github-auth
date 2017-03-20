@@ -1,11 +1,11 @@
 import { Component } from 'react'
 import NextGlobalClientStore from '../modules/NextGlobalClientStore'
-import getAndAssertEnvVar from '../modules/getAndAssertEnvVar'
+import demandEnvVar from '../modules/demandEnvVar'
 
 const loadEnvironmentVars = namesToAliases => {
   let environment = {}
   Object.keys(namesToAliases).forEach(key => {
-    const value = getAndAssertEnvVar(key)
+    const value = demandEnvVar(key)
     const alias = namesToAliases[key]
     environment[alias] = value
   })
