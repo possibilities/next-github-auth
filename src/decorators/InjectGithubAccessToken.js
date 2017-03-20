@@ -1,16 +1,18 @@
-import { Component } from 'react'
+import React, { Component } from 'react'
 import NextGlobalClientStore from '../modules/NextGlobalClientStore'
 
 const getGithubAccessToken = req => {
   if (process.browser) {
     return NextGlobalClientStore.get('githubAccessToken')
   } else {
-    return req.headers.cookie && req.headers.cookie
+    const accessTokenCookie = req.headers.cookie && req.headers.cookie
       .split(';')
       .map(c => c.trim())
       .find(c => c.startsWith('githubAccessToken='))
-      .split('=')
-      .pop()
+
+    if (accessTokenCookie) {
+      return accessTokenCookie.split('=').pop()
+    }
   }
 }
 

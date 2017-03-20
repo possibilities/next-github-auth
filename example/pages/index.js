@@ -1,6 +1,6 @@
 import Navigation from '../components/Navigation'
 import SignInOrProfileLink from '../components/SignInOrProfileLink'
-import PublicPage from '../src/decorators/PublicPage'
+import { PublicPage } from 'next-github-auth'
 
 const Home = () => (
   <div>

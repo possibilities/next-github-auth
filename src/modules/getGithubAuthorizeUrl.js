@@ -13,7 +13,7 @@ const getRedirectUri = (githubClientId, nextUrl) => {
 
   let afterAuthUrl = `${window.location.origin}/sign-in`
 
-  if (nextUrl) {
+  if (nextUrl && nextUrl !== '/sign-in') {
     afterAuthUrl = `${afterAuthUrl}?nextUrl=${nextUrl}`
   }
 

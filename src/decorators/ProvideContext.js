@@ -1,4 +1,4 @@
-import { Component, PropTypes } from 'react'
+import React, { Component, PropTypes } from 'react'
 
 const ProvideGithubContext = Page => {
   return class ProvideGithubContextWrapper extends Component {

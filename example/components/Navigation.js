@@ -1,5 +1,7 @@
-import PrivateLink from '../src/components/PrivateLink'
-import Link from 'next/link'
+import { PrivateLink } from 'next-github-auth'
+import NextLink from 'next/link'
+
+const Link = PrivateLink(NextLink)
 
 const Navigation = () => {
   const listStyle = {
@@ -29,9 +31,9 @@ const Navigation = () => {
           &nbsp; | &nbsp;
         </li>
         <li style={itemStyle}>
-          <PrivateLink href='/private'>
+          <Link href='/private'>
             <a>private page</a>
-          </PrivateLink>
+          </Link>
         </li>
       </ul>
     </div>

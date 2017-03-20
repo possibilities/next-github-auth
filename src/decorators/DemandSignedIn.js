@@ -1,6 +1,5 @@
-import { Component, PropTypes } from 'react'
+import React, { Component, PropTypes } from 'react'
 import getGithubAuthorizeUrl from '../modules/getGithubAuthorizeUrl'
-import getGithubAccessTokenCookie from '../modules/getGithubAccessTokenCookie'
 import Router from 'next/router'
 
 const DemandSignedIn = Page => {
@@ -8,26 +7,21 @@ const DemandSignedIn = Page => {
     static propTypes = {
       githubUser: PropTypes.shape({
         login: PropTypes.string.isRequired
-      }).isRequired,
+      }),
       env: PropTypes.shape({
         githubClientId: PropTypes.string.isRequired
       }).isRequired
     }
 
     static async getInitialProps (pageContext) {
-      const { req, res, env } = pageContext
+      const { env, url } = pageContext
 
-      if (!process.browser && !pageContext.githubUser) {
-        const { githubClientId } = env
-
-        const githubAccessTokenCookie =
-          getGithubAccessTokenCookie(req, '')
-
-        res.writeHead(302, {
-          'Set-Cookie': githubAccessTokenCookie,
-          Location: getGithubAuthorizeUrl(githubClientId)
-        })
-        return res.end()
+      if (!pageContext.githubUser) {
+        if (process.browser) {
+          return { nextUrl: '/private' }
+        } else {
+          return { nextUrl: url }
+        }
       }
 
       const pageProps = Page.getInitialProps
@@ -40,7 +34,10 @@ const DemandSignedIn = Page => {
     constructor (props) {
       super(props)
       if (process.browser && !props.githubUser) {
-        window.location = getGithubAuthorizeUrl(props.env.githubClientId)
+        window.location = getGithubAuthorizeUrl(
+          props.env.githubClientId,
+          props.nextUrl
+        )
       }
     }
 
@@ -53,9 +50,9 @@ const DemandSignedIn = Page => {
     render () {
       if (this.props.githubUser) {
         return <Page {...this.props} />
-      } else {
-        return null
       }
+
+      return null
     }
   }
 }

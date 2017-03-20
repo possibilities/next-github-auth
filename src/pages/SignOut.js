@@ -1,7 +1,7 @@
 import { Component } from 'react'
 import getGithubAccessTokenCookie from '../modules/getGithubAccessTokenCookie'
 
-export default class SignOutPage extends Component {
+export default class SignOut extends Component {
   static getInitialProps ({ req, res }) {
     if (!process.browser) {
       const githubAccessTokenCookie = getGithubAccessTokenCookie(req, '')

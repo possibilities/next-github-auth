@@ -2,14 +2,15 @@ import { Component, PropTypes } from 'react'
 import request from 'axios'
 import demandEnvVar from '../modules/demandEnvVar'
 import getGithubAccessTokenCookie from '../modules/getGithubAccessTokenCookie'
+import getGithubAuthorizeUrl from '../modules/getGithubAuthorizeUrl'
 import InjectEnvVars from '../decorators/InjectEnvVars'
 
 const githubAccessTokenUrl = 'https://github.com/login/oauth/access_token'
 const githubClientSecret = demandEnvVar('GITHUB_CLIENT_SECRET')
 
-const fetchGithubAccessToken = async (code, githubClientId) => {
+const fetchGithubAccessToken = async (githubAuthCode, githubClientId) => {
   const response = await request.post(githubAccessTokenUrl, {
-    code,
+    code: githubAuthCode,
     client_id: githubClientId,
     client_secret: githubClientSecret
   }, { headers: { Accept: 'application/json' } })
@@ -20,7 +21,7 @@ const fetchGithubAccessToken = async (code, githubClientId) => {
   }
 }
 
-class SignInPage extends Component {
+class SignIn extends Component {
   static propTypes = {
     githubUser: PropTypes.shape({
       login: PropTypes.string.isRequired
@@ -34,28 +35,38 @@ class SignInPage extends Component {
     const {
       req,
       res,
-      query: { code, nextUrl },
+      query: { code: githubAuthCode, nextUrl = '/' },
       env: { githubClientId }
     } = pageContext
 
-    if (!process.browser) {
-      const accessToken = await fetchGithubAccessToken(code, githubClientId)
+    let isAuthorized = false
+
+    if (githubAuthCode) {
+      const accessToken =
+        await fetchGithubAccessToken(githubAuthCode, githubClientId)
       const githubAccessTokenCookie =
         getGithubAccessTokenCookie(req, accessToken || '')
 
       res.setHeader('Set-Cookie', githubAccessTokenCookie)
-
-      return { nextUrl }
+      isAuthorized = true
     }
 
-    return {}
+    return { githubClientId, githubAuthCode, nextUrl, isAuthorized }
   }
 
   constructor (props) {
     super(props)
     if (process.browser) {
       // Wait to redirect on the client so the cookie will be available
-      window.location = props.nextUrl || '/'
+      if (props.nextUrl) {
+        if (props.isAuthorized) {
+          window.location = props.nextUrl
+        } else {
+          window.location = getGithubAuthorizeUrl(props.githubClientId, props.nextUrl)
+        }
+      } else {
+        window.location = getGithubAuthorizeUrl(props.githubClientId)
+      }
     }
   }
 
@@ -69,4 +80,4 @@ const injectGithubClientId = InjectEnvVars({
   GITHUB_CLIENT_ID: 'githubClientId'
 })
 
-export default injectGithubClientId(SignInPage)
+export default injectGithubClientId(SignIn)
