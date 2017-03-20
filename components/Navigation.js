@@ -1,11 +1,7 @@
-import { PropTypes } from 'react'
 import PrivateLink from '../src/components/PrivateLink'
 import Link from 'next/link'
 
-const Navigation = ({
-  githubUser,
-  githubClientId
-}) => {
+const Navigation = () => {
   const listStyle = {
     listStyle: 'none',
     margin: 0,
@@ -33,24 +29,13 @@ const Navigation = ({
           &nbsp; | &nbsp;
         </li>
         <li style={itemStyle}>
-          <PrivateLink
-            href='/private'
-            githubUser={githubUser}
-            githubClientId={githubClientId}>
-
+          <PrivateLink href='/private'>
             <a>private page</a>
           </PrivateLink>
         </li>
       </ul>
     </div>
   )
-}
-
-Navigation.propTypes = {
-  githubUser: PropTypes.shape({
-    login: PropTypes.string.isRequired
-  }),
-  githubClientId: PropTypes.string.isRequired
 }
 
 export default Navigation

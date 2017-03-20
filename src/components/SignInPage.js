@@ -25,19 +25,18 @@ class SignInPage extends Component {
     githubUser: PropTypes.shape({
       login: PropTypes.string.isRequired
     }),
-    githubClientId: PropTypes.string,
     env: PropTypes.shape({
       githubClientId: PropTypes.string.isRequired
     }).isRequired
   }
 
-  static async getInitialProps (context) {
+  static async getInitialProps (pageContext) {
     const {
       req,
       res,
       query: { code, nextUrl },
       env: { githubClientId }
-    } = context
+    } = pageContext
 
     if (!process.browser) {
       const accessToken = await fetchGithubAccessToken(code, githubClientId)

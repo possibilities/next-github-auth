@@ -14,10 +14,10 @@ const DemandSignedIn = Page => {
       }).isRequired
     }
 
-    static async getInitialProps (context) {
-      const { req, res, env } = context
+    static async getInitialProps (pageContext) {
+      const { req, res, env } = pageContext
 
-      if (!process.browser && !context.githubUser) {
+      if (!process.browser && !pageContext.githubUser) {
         const { githubClientId } = env
 
         const githubAccessTokenCookie =
@@ -31,7 +31,7 @@ const DemandSignedIn = Page => {
       }
 
       const pageProps = Page.getInitialProps
-        ? await Page.getInitialProps(context)
+        ? await Page.getInitialProps(pageContext)
         : {}
 
       return { ...pageProps, env }

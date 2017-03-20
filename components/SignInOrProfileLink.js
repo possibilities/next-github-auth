@@ -1,6 +1,6 @@
 import { PropTypes } from 'react'
-import ProfileLink from './ProfileLink'
-import SignInLink from './SignInLink'
+import PrivateLink from '../src/components/PrivateLink'
+import Link from 'next/link'
 
 const styles = {
   position: 'absolute',
@@ -8,20 +8,21 @@ const styles = {
   top: 20
 }
 
-const SignInOrProfileLink = ({ githubUser, githubClientId }) => (
+const SignInOrProfileLink = (props, { githubUser }) => (
   <div style={styles}>
     {githubUser
-      ? <ProfileLink githubUser={githubUser} />
-      : <SignInLink githubClientId={githubClientId} />
+      ? <div>
+          hi {githubUser.login} (<Link href='/sign-out'><a>sign out</a></Link>)
+        </div>
+      : <PrivateLink href='/'><a>sign in</a></PrivateLink>
     }
   </div>
 )
 
-SignInOrProfileLink.propTypes = {
+SignInOrProfileLink.contextTypes = {
   githubUser: PropTypes.shape({
-    login: PropTypes.string.isRequired
-  }),
-  githubClientId: PropTypes.string.isRequired
+    login: PropTypes.string
+  })
 }
 
 export default SignInOrProfileLink

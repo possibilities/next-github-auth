@@ -7,14 +7,14 @@ const handleClick = (githubClientId, href) => event => {
   window.location = getGithubAuthorizeUrl(githubClientId, href)
 }
 
-const PrivateLink = props => {
+const PrivateLink = (props, context) => {
   const {
     href,
     children,
-    githubUser,
-    githubClientId,
     ...additionalProps
   } = props
+
+  const { githubClientId, githubUser } = context
 
   if (githubUser) {
     return <Link href={href} {...additionalProps}>{children}</Link>
@@ -38,11 +38,14 @@ const PrivateLink = props => {
 
 PrivateLink.propTypes = {
   href: PropTypes.string.isRequired,
-  children: PropTypes.object.isRequired,
+  children: PropTypes.object.isRequired
+}
+
+PrivateLink.contextTypes = {
+  githubClientId: PropTypes.string,
   githubUser: PropTypes.shape({
-    login: PropTypes.string.isRequired
-  }),
-  githubClientId: PropTypes.string.isRequired
+    login: PropTypes.string
+  })
 }
 
 export default PrivateLink
