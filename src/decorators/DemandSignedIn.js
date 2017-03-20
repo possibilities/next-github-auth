@@ -3,8 +3,8 @@ import getGithubAuthorizeUrl from '../modules/getGithubAuthorizeUrl'
 import getGithubAccessTokenCookie from '../modules/getGithubAccessTokenCookie'
 import Router from 'next/router'
 
-const EnsureSignedIn = Page => {
-  return class EnsureSignedInWrapper extends Component {
+const DemandSignedIn = Page => {
+  return class DemandSignedInWrapper extends Component {
     static propTypes = {
       githubUser: PropTypes.shape({
         login: PropTypes.string.isRequired
@@ -60,4 +60,4 @@ const EnsureSignedIn = Page => {
   }
 }
 
-export default EnsureSignedIn
+export default DemandSignedIn
