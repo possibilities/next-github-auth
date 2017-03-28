@@ -1,4 +1,7 @@
 {
+  "engines": {
+    "node": "6.x.x"
+  },
   "scripts": {
     "dev": "next",
     "build": "next build",
@@ -8,7 +11,7 @@
     "axios": "^0.15.3",
     "glamor": "^2.20.24",
     "next": "^2.0.0",
-    "next-github-auth": "*",
+    "next-github-auth": "^0.1.1",
     "react": "^15.4.2",
     "react-dom": "^15.4.2"
   }
