@@ -1,16 +1,16 @@
 import { Component, PropTypes } from 'react'
 import request from 'axios'
-import assertEnvVar from '../modules/assertEnvVar'
+import demandEnvVar from '../modules/demandEnvVar'
 import getGithubAccessTokenCookie from '../modules/getGithubAccessTokenCookie'
+import getGithubAuthorizeUrl from '../modules/getGithubAuthorizeUrl'
 import InjectEnvVars from '../decorators/InjectEnvVars'
-import Navigation from '../components/Navigation'
 
 const githubAccessTokenUrl = 'https://github.com/login/oauth/access_token'
-const githubClientSecret = assertEnvVar('GITHUB_CLIENT_SECRET')
+const githubClientSecret = demandEnvVar('GITHUB_CLIENT_SECRET')
 
-const fetchGithubAccessToken = async (code, githubClientId) => {
+const fetchGithubAccessToken = async (githubAuthCode, githubClientId) => {
   const response = await request.post(githubAccessTokenUrl, {
-    code,
+    code: githubAuthCode,
     client_id: githubClientId,
     client_secret: githubClientSecret
   }, { headers: { Accept: 'application/json' } })
@@ -26,66 +26,53 @@ class SignIn extends Component {
     githubUser: PropTypes.shape({
       login: PropTypes.string.isRequired
     }),
-    githubClientId: PropTypes.string,
     env: PropTypes.shape({
       githubClientId: PropTypes.string.isRequired
     }).isRequired
   }
 
-  static async getInitialProps (context) {
+  static async getInitialProps (pageContext) {
     const {
       req,
       res,
-      query,
+      query: { code: githubAuthCode, nextUrl = '/' },
       env: { githubClientId }
-    } = context
+    } = pageContext
 
-    if (!process.browser) {
-      const { code, nextUrl } = query
+    let isAuthorized = false
+
+    if (githubAuthCode) {
       const accessToken =
-        await fetchGithubAccessToken(code, githubClientId)
-
-      let githubAccessTokenCookie
-      if (accessToken) {
-        githubAccessTokenCookie =
-          githubAccessTokenCookie = getGithubAccessTokenCookie(req, accessToken)
-      } else {
-        githubAccessTokenCookie = getGithubAccessTokenCookie(req, '')
-      }
+        await fetchGithubAccessToken(githubAuthCode, githubClientId)
+      const githubAccessTokenCookie =
+        getGithubAccessTokenCookie(req, accessToken || '')
 
       res.setHeader('Set-Cookie', githubAccessTokenCookie)
-
-      return { nextUrl }
+      isAuthorized = true
     }
 
-    return {}
+    return { githubClientId, githubAuthCode, nextUrl, isAuthorized }
   }
 
   constructor (props) {
     super(props)
     if (process.browser) {
       // Wait to redirect on the client so the cookie will be available
-      window.location = props.nextUrl || '/'
+      if (props.nextUrl) {
+        if (props.isAuthorized) {
+          window.location = props.nextUrl
+        } else {
+          window.location = getGithubAuthorizeUrl(props.githubClientId, props.nextUrl)
+        }
+      } else {
+        window.location = getGithubAuthorizeUrl(props.githubClientId)
+      }
     }
   }
 
   render () {
-    const {
-      githubUser,
-      env: { githubClientId }
-    } = this.props
-
-    return (
-      <div>
-        <Navigation
-          githubUser={githubUser}
-          githubClientId={githubClientId} />
-
-        <br />
-
-        <div>Sign in with GitHub was successful! Redirecting...</div>
-      </div>
-    )
+    // All server side, nothing to show
+    return null
   }
 }
 

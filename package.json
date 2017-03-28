@@ -1,21 +1,42 @@
 {
+  "name": "next-github-auth",
+  "version": "0.1.0",
   "scripts": {
-    "dev": "next",
-    "build": "next build",
-    "start": "next start",
+    "dev": "rimraf lib && babel src --out-dir lib --watch",
+    "build": "rimraf lib && babel src --out-dir lib",
+    "prepublish": "rimraf lib && babel src --out-dir lib",
     "test": "standard",
     "lint": "standard"
   },
+  "main": "lib/index.js",
+  "files": [
+    "lib"
+  ],
   "dependencies": {
-    "axios": "^0.15.3",
-    "glamor": "^2.20.24",
-    "next": "2.0.0-beta.36",
-    "react": "^15.4.2",
-    "react-dom": "^15.4.2"
+    "axios": "^0.15.3"
   },
   "devDependencies": {
+    "babel-cli": "^6.24.0",
     "babel-eslint": "^7.1.1",
+    "babel-preset-latest": "^6.24.0",
+    "babel-preset-react": "^6.23.0",
+    "babel-preset-stage-0": "^6.22.0",
+    "next": "^2.0.0",
+    "react": "^15.4.2",
+    "react-dom": "^15.4.2",
+    "rimraf": "^2.6.1",
     "standard": "^9.0.1"
+  },
+  "peerDependencies": {
+    "next": ">=2.0.0"
+  },
+  "babel": {
+    "presets": [
+      "next/babel",
+      "latest",
+      "react",
+      "stage-0"
+    ]
   },
   "standard": {
     "parser": "babel-eslint"

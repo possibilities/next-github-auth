@@ -1,12 +1,13 @@
+import React from 'react'
 import Document, { Head, Main, NextScript } from 'next/document'
 
 const resetCssUrl =
   'https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css'
 
 class Root extends Document {
-  static async getInitialProps (context) {
-    const props = await super.getInitialProps(context)
-    const page = context.renderPage()
+  static async getInitialProps (pageContext) {
+    const props = await super.getInitialProps(pageContext)
+    const page = pageContext.renderPage()
     return { ...props, ...page }
   }
 
@@ -18,7 +19,7 @@ class Root extends Document {
           <link rel='stylesheet' href={resetCssUrl} />
         </Head>
 
-        <body style={{ margin: 10 }}>
+        <body style={{ margin: 20 }}>
           <Main />
           <NextScript />
         </body>

@@ -1,4 +1,4 @@
-import { Component, PropTypes } from 'react'
+import React, { Component, PropTypes } from 'react'
 import request from 'axios'
 import NextGlobalClientStore from '../modules/NextGlobalClientStore'
 
@@ -39,11 +39,11 @@ const InjectGithubUser = Page => {
       })
     }
 
-    static async getInitialProps (context) {
-      const { githubAccessToken } = context
+    static async getInitialProps (pageContext) {
+      const { githubAccessToken } = pageContext
       const githubUser = await getGithubUser(githubAccessToken)
       const pageProps = Page.getInitialProps
-        ? await Page.getInitialProps({ ...context, githubUser })
+        ? await Page.getInitialProps({ ...pageContext, githubUser })
         : {}
       return { ...pageProps, githubUser }
     }

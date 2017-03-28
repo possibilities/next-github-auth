@@ -1,10 +1,11 @@
-import { Component } from 'react'
+import React, { Component } from 'react'
 import NextGlobalClientStore from '../modules/NextGlobalClientStore'
+import demandEnvVar from '../modules/demandEnvVar'
 
-const getEnvironment = namesToAliases => {
+const loadEnvironmentVars = namesToAliases => {
   let environment = {}
   Object.keys(namesToAliases).forEach(key => {
-    const value = process.env[key]
+    const value = demandEnvVar(key)
     const alias = namesToAliases[key]
     environment[alias] = value
   })
@@ -14,13 +15,13 @@ const getEnvironment = namesToAliases => {
 
 const InjectEnvVars = namesToAliases => Page => {
   return class InjectEnvVarsWrapper extends Component {
-    static async getInitialProps (context) {
+    static async getInitialProps (pageContext) {
       const env = process.browser
         ? NextGlobalClientStore.get('env')
-        : getEnvironment(namesToAliases)
+        : loadEnvironmentVars(namesToAliases)
 
       const pageProps = Page.getInitialProps
-        ? await Page.getInitialProps({ ...context, env })
+        ? await Page.getInitialProps({ ...pageContext, env })
         : {}
 
       return { ...pageProps, env }

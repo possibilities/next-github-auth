@@ -1,49 +1,99 @@
-# Next.js with Github auth example
+# Next.js auth with Github
 
-A [Next.js](https://github.com/zeit/next.js) example using [Github](https://github.com) authentication
+Components and decorators for using [Github](https://github.com) authentication with [Next.js](https://github.com/zeit/next.js)
 
-[![CircleCI](https://circleci.com/gh/possibilities/next-github-auth-example.svg?style=svg)](https://circleci.com/gh/possibilities/next-github-auth-example)
+[![CircleCI](https://circleci.com/gh/possibilities/next-github-auth.svg?style=svg)](https://circleci.com/gh/possibilities/next-github-auth)
 
-
-![screen](https://raw.githubusercontent.com/possibilities/next-github-auth-example/master/screen.gif "screen")
-
+![screen](https://raw.githubusercontent.com/possibilities/next-github-auth/master/screen.gif "screen")
 
 ## Usage
 
-1. Install
+1. Install into your Next.js app
 
-  ```
-  yarn install
-  ```
+    ```
+    yarn add next-github-auth
+    ```
+
+1. Create `sign-in` and `sign-out` pages
+
+    At `pages/sign-in.js`
+
+    ```
+    import { SignIn } from 'next-github-auth'
+    export default SignIn
+    ```
+
+    At `pages/sign-out.js`
+
+    ```
+    import { SignOut } from 'next-github-auth'
+    export default SignOut
+    ```
+
+1. Wrap private pages with `PrivatePage` decorator
+
+    Any page that should only be accessible to authenticated users should be wrapped with the `PrivatePage` decorator, e.g.:
+
+    ```
+    import { PrivatePage } from 'next-github-auth'
+
+    const Private = props => <div>private page!</div>
+    export default PrivatePage(Private)
+
+    ```
+
+1. Wrap public pages with `PublicPage` decorator
+
+    All other pages should be wrapped with the `PublicPage` decorator, e.g.:
+
+    ```
+    import { PublicPage } from 'next-github-auth'
+
+    const Public = props => <div>public page!</div>
+    export default PublicPage(Public)
+
+    ```
+
+1. Wrap `Link` components with the `PrivateLink` decorator
+
+    To force non-authenticated users to sign in before proceeding to any linked page decorate the `Link` component with `PrivateLink`, e.g.:
+
+    ```
+    import { PublicLink, PrivateLink } from 'next-github-auth'
+    import NextLink from 'next/link'
+
+    const Link = PrivateLink(NextLink)
+
+    const Public = props => (
+      <div>
+        <div>public page!</div>
+        <Link href='/secret'>secret page!</Link>
+      </div>
+    )
+
+    export default PublicPage(Public)
+
+    ```
+
+## Setup app environment
 
 1. [Add an OAuth application](https://github.com/settings/developers) to your Github account to generate a client id and secret
 
-   Set the callback URL to the public URL of the deployed app
+    Set the callback URL to the public URL of the deployed app
 
 1. Setup environment
 
-  ```
-  export GITHUB_CLIENT_ID=YOUR_APP_ID
-  export GITHUB_CLIENT_SECRET=YOUR_APP_SECRET
-  ```
+    Export your GitHub app's client id and secret as environment variables
+
+    ```
+    export GITHUB_CLIENT_ID=YOUR_APP_ID
+    export GITHUB_CLIENT_SECRET=YOUR_APP_SECRET
+    ```
+
+## Run app
 
 1. Start the app
 
-  ```
-  yarn dev
-  ```
-
-## Demo
-
-The example app is deployed to [https://next-github-auth-example.now.sh](https://next-github-auth-example.now.sh)
-
-## Deploy
-
-Deploy to [now](https://now.sh)
-
-```
-now secret add next-github-id YOUR_APP_ID
-now secret add next-github-secret YOUR_APP_SECRET
-
-now -e GITHUB_CLIENT_ID=@next-github-id -e GITHUB_CLIENT_SECRET=@next-github-secret
-```
+    ```
+    yarn dev
+    ```

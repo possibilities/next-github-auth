@@ -1,7 +1,7 @@
 import { Component, PropTypes } from 'react'
 import Navigation from '../components/Navigation'
 import SignInOrProfileLink from '../components/SignInOrProfileLink'
-import PrivatePage from '../decorators/PrivatePage'
+import { PrivatePage } from 'next-github-auth'
 import request from 'axios'
 
 const getGithubRepos = async githubAccessToken => {
@@ -20,33 +20,23 @@ class Private extends Component {
   static propTypes = {
     repos: PropTypes.arrayOf(PropTypes.shape({
       fullName: PropTypes.string.isRequired
-    })).isRequired,
-    githubUser: PropTypes.shape({
-      login: PropTypes.string.isRequired
-    }).isRequired,
-    env: PropTypes.shape({
-      githubClientId: PropTypes.string.isRequired
-    }).isRequired
+    })).isRequired
   }
 
-  static async getInitialProps (context) {
-    const { githubAccessToken } = context
-    const repos = (await getGithubRepos(githubAccessToken)).map(repoView)
+  static async getInitialProps (pageContext) {
+    const { githubAccessToken } = pageContext
+    const githubRepos = await getGithubRepos(githubAccessToken)
+    const repos = githubRepos.map(repoView)
     return { repos }
   }
 
   render () {
-    const { env: { githubClientId }, githubUser, repos } = this.props
+    const { repos } = this.props
 
     return (
       <div>
-        <Navigation
-          githubUser={githubUser}
-          githubClientId={githubClientId} />
-
-        <SignInOrProfileLink
-          githubUser={githubUser}
-          githubClientId={githubClientId} />
+        <Navigation />
+        <SignInOrProfileLink />
 
         <br />
 
