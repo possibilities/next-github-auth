@@ -1,4 +1,4 @@
-const getGithubAccessTokenCookie = (req, accessToken) => {
+const getGithubAccessTokenCookie = (req, accessToken = '') => {
   const isSecure = req.headers['x-forwarded-proto'] === 'https'
 
   let cookie = `githubAccessToken=${accessToken}; SameSite=Strict; HttpOnly`

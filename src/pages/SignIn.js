@@ -9,63 +9,70 @@ const githubAccessTokenUrl = 'https://github.com/login/oauth/access_token'
 const githubClientSecret = demandEnvVar('GITHUB_CLIENT_SECRET')
 
 const fetchGithubAccessToken = async (githubAuthCode, githubClientId) => {
-  const response = await request.post(githubAccessTokenUrl, {
-    code: githubAuthCode,
-    client_id: githubClientId,
-    client_secret: githubClientSecret
-  }, { headers: { Accept: 'application/json' } })
+  const response = await request.post(
+    githubAccessTokenUrl,
+    {
+      code: githubAuthCode,
+      client_id: githubClientId,
+      client_secret: githubClientSecret
+    },
+    {
+      headers: {
+        Accept: 'application/json'
+      }
+    }
+  )
 
   if (response.status === 200) {
-    const accessToken = response.data.access_token
-    return accessToken
+    return response.data.access_token
   }
 }
 
 class SignIn extends Component {
   static propTypes = {
-    githubUser: PropTypes.shape({
-      login: PropTypes.string.isRequired
-    }),
-    env: PropTypes.shape({
-      githubClientId: PropTypes.string.isRequired
-    }).isRequired
+    githubClientId: PropTypes.string.isRequired,
+    nextUrl: PropTypes.string.isRequired,
+    isAuthorized: PropTypes.string.isRequired
   }
 
-  static async getInitialProps (pageContext) {
-    const {
-      req,
-      res,
-      query: { code: githubAuthCode, nextUrl = '/' },
-      env: { githubClientId }
-    } = pageContext
-
+  static async getInitialProps ({
+    req,
+    res,
+    env: {
+      githubClientId
+    },
+    query: {
+      nextUrl = '/',
+      code: githubAuthCode
+    }
+  }) {
     let isAuthorized = false
 
     if (githubAuthCode) {
       const accessToken =
         await fetchGithubAccessToken(githubAuthCode, githubClientId)
       const githubAccessTokenCookie =
-        getGithubAccessTokenCookie(req, accessToken || '')
+        getGithubAccessTokenCookie(req, accessToken)
 
       res.setHeader('Set-Cookie', githubAccessTokenCookie)
-      isAuthorized = true
+
+      isAuthorized = !!accessToken
     }
 
-    return { githubClientId, githubAuthCode, nextUrl, isAuthorized }
+    return { githubClientId, nextUrl, isAuthorized }
   }
 
   constructor (props) {
     super(props)
-    if (process.browser) {
-      // Wait to redirect on the client so the cookie will be available
-      if (props.nextUrl) {
-        if (props.isAuthorized) {
-          window.location = props.nextUrl
-        } else {
-          window.location = getGithubAuthorizeUrl(props.githubClientId, props.nextUrl)
-        }
+
+    const { nextUrl, isAuthorized, githubClientId } = props
+
+    if (process.browser && nextUrl) {
+      if (isAuthorized) {
+        // Wait to redirect on the client so the cookie will be available
+        window.location = nextUrl
       } else {
-        window.location = getGithubAuthorizeUrl(props.githubClientId)
+        window.location = getGithubAuthorizeUrl(githubClientId, nextUrl)
       }
     }
   }
