@@ -4,7 +4,7 @@ Components and decorators for using [Github](https://github.com) authentication 
 
 [![CircleCI](https://circleci.com/gh/possibilities/next-github-auth.svg?style=svg)](https://circleci.com/gh/possibilities/next-github-auth)
 
-![screen](https://raw.githubusercontent.com/possibilities/next-github-auth/master/screen.gif "screen")
+![screen](screen.gif "screen")
 
 ## Usage
 
