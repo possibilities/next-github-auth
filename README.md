@@ -32,7 +32,7 @@ Components and decorators for using [Github](https://github.com) authentication 
 
 1. Wrap private pages with `PrivatePage` decorator
 
-    Any page that should only be accessible to authenticated users should be wrapped with the `PrivatePage` decorator, e.g.:
+    Any Next.js "page" that should only be accessible to authenticated users should be wrapped with the `PrivatePage` decorator, e.g.:
 
     ```
     import { PrivatePage } from 'next-github-auth'
@@ -44,7 +44,7 @@ Components and decorators for using [Github](https://github.com) authentication 
 
 1. Wrap public pages with `PublicPage` decorator
 
-    All other pages should be wrapped with the `PublicPage` decorator, e.g.:
+    _All other_ Next.js "pages" should be wrapped with the `PublicPage` decorator, e.g.:
 
     ```
     import { PublicPage } from 'next-github-auth'
@@ -72,6 +72,32 @@ Components and decorators for using [Github](https://github.com) authentication 
     )
 
     export default PublicPage(Public)
+
+    ```
+
+1. Optionally access the currently signed in github user and access tokens via context, e.g:
+
+
+    ```
+    import React, { PropTypes } from 'react'
+    import { PrivatePage } from 'next-github-auth'
+
+    const UserProfile = (props, {
+      githubUser: { login },
+      githubAccessToken
+    }) => (
+      <div>{login}'s profile</div>
+      <div>token: {githubAccessToken ? 'hidden' : 'not available'}</div>
+    )
+
+    SignInOrProfileLink.contextTypes = {
+      githubAccessToken: PropTypes.string,
+      githubUser: PropTypes.shape({
+        login: PropTypes.string
+      })
+    }
+
+    export default PrivatePage(UserProfile)
 
     ```
 

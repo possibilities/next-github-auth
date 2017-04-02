@@ -32,7 +32,7 @@ class SignIn extends Component {
   static propTypes = {
     githubClientId: PropTypes.string.isRequired,
     nextUrl: PropTypes.string.isRequired,
-    isAuthorized: PropTypes.string.isRequired
+    isAuthorized: PropTypes.bool.isRequired
   }
 
   static async getInitialProps ({
