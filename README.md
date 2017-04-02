@@ -82,11 +82,16 @@ Components and decorators for using [Github](https://github.com) authentication 
     import React, { PropTypes } from 'react'
     import { PrivatePage } from 'next-github-auth'
 
-    const UserProfile = (props, { githubUser: { login } }) => (
+    const UserProfile = (props, {
+      githubUser: { login },
+      githubAccessToken
+    }) => (
       <div>{login}'s profile</div>
+      <div>token: {githubAccessToken ? 'hidden' : 'not available'}</div>
     )
 
     SignInOrProfileLink.contextTypes = {
+      githubAccessToken: PropTypes.string,
       githubUser: PropTypes.shape({
         login: PropTypes.string
       })
