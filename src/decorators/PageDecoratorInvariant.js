@@ -3,7 +3,7 @@ import invariant from 'invariant'
 
 const PageDecoratorInvariant = (Page, decoratorName) => {
   return class WrappedPage extends Component {
-    static async getInitialProps(context) {
+    static async getInitialProps (context) {
       const pageProps = Page.getInitialProps
         ? await Page.getInitialProps(context)
         : {}
@@ -13,7 +13,7 @@ const PageDecoratorInvariant = (Page, decoratorName) => {
         : pageProps
     }
 
-    constructor(props) {
+    constructor (props) {
       super(props)
       invariant(
         props.__isWrappingPageComponent,
@@ -21,8 +21,8 @@ const PageDecoratorInvariant = (Page, decoratorName) => {
       )
     }
 
-    render() {
-      return <Page { ...this.props } />
+    render () {
+      return <Page {...this.props} />
     }
   }
 }
