@@ -86,8 +86,10 @@ Components and decorators for using [Github](https://github.com) authentication 
       githubUser: { login },
       githubAccessToken
     }) => (
-      <div>{login}'s profile</div>
-      <div>token: {githubAccessToken ? 'hidden' : 'not available'}</div>
+      <div>
+        <div>{login}'s profile</div>
+        <div>token: {githubAccessToken ? 'hidden' : 'not available'}</div>
+      </div>
     )
 
     SignInOrProfileLink.contextTypes = {
