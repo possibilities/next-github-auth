@@ -1,10 +1,9 @@
 import compose from '../modules/compose'
 
-import InjectEnvVars from '../decorators/InjectEnvVars'
-import InjectGithubUser from '../decorators/InjectGithubUser'
-import InjectGithubAccessToken
-  from '../decorators/InjectGithubAccessToken'
-import ProvideContext from '../decorators/ProvideContext'
+import InjectEnvVars from './InjectEnvVars'
+import InjectGithubUser from './InjectGithubUser'
+import InjectGithubAccessToken from './InjectGithubAccessToken'
+import ProvideContext from './ProvideContext'
 
 const injectGithubClientId = InjectEnvVars({
   GITHUB_CLIENT_ID: 'githubClientId'
