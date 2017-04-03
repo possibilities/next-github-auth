@@ -1,7 +1,4 @@
-import { PrivateLink } from 'next-github-auth'
-import NextLink from 'next/link'
-
-const Link = PrivateLink(NextLink)
+import Link from 'next/link'
 
 const Navigation = () => {
   const listStyle = {

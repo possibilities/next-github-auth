@@ -1,8 +1,6 @@
-import React, { PropTypes } from 'react'
-import { PrivateLink } from 'next-github-auth'
-import NextLink from 'next/link'
-
-const Link = PrivateLink(NextLink)
+import React from 'react'
+import PropTypes from 'prop-types'
+import Link from 'next/link'
 
 const styles = {
   position: 'absolute',
@@ -12,14 +10,16 @@ const styles = {
 
 const signOutLink = <Link href='/sign-out'><a>sign out</a></Link>
 
-const SignInOrProfileLink = (props, { githubUser: { login } = {} }) => (
-  <div style={styles}>
-    {login
-      ? <div>hi {login} ({signOutLink})</div>
-      : <Link href='/sign-in'><a>sign in</a></Link>
-    }
-  </div>
-)
+const SignInOrProfileLink = (props, { githubUser }) => {
+  return (
+    <div style={styles}>
+      {githubUser
+        ? <div>hi {githubUser.login} ({signOutLink})</div>
+        : <Link href='/sign-in'><a>sign in</a></Link>
+      }
+    </div>
+  )
+}
 
 SignInOrProfileLink.contextTypes = {
   githubUser: PropTypes.shape({

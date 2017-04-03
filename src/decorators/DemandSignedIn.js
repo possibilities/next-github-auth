@@ -1,55 +1,67 @@
-import React, { Component, PropTypes } from 'react'
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import getGithubAuthorizeUrl from '../modules/getGithubAuthorizeUrl'
-import Router from 'next/router'
 
 const DemandSignedIn = Page => {
   return class DemandSignedInWrapper extends Component {
     static propTypes = {
-      githubUser: PropTypes.shape({
-        login: PropTypes.string.isRequired
-      }),
       env: PropTypes.shape({
         githubClientId: PropTypes.string.isRequired
       }).isRequired
     }
 
-    static async getInitialProps (pageContext) {
-      const { env, url } = pageContext
+    static contextTypes = {
+      githubUser: PropTypes.shape({
+        login: PropTypes.string.isRequired
+      })
+    }
 
-      if (!pageContext.githubUser) {
+    static async getInitialProps (nextPageContext) {
+      const { env: { githubClientId }, pathname, githubUser } = nextPageContext
+
+      if (!githubUser) {
         if (process.browser) {
-          return { nextUrl: '/private' }
+          window.location = getGithubAuthorizeUrl(githubClientId, pathname)
+          return { isRedirecting: true }
         } else {
-          return { nextUrl: url }
+          return { nextUrl: pathname, githubClientId }
         }
       }
 
+      const githubAccessToken = nextPageContext.githubAccessToken
+
       const pageProps = Page.getInitialProps
-        ? await Page.getInitialProps(pageContext)
+        ? await Page.getInitialProps({
+          ...nextPageContext,
+          githubUser,
+          githubAccessToken
+        })
         : {}
 
-      return { ...pageProps, env }
+      return {
+        ...pageProps,
+        githubClientId,
+        githubUser,
+        githubAccessToken,
+        nextUrl: pathname
+      }
     }
 
     constructor (props) {
       super(props)
-      if (process.browser && !props.githubUser) {
-        window.location = getGithubAuthorizeUrl(
-          props.env.githubClientId,
-          props.nextUrl
-        )
-      }
-    }
-
-    componentWillReceiveProps (nextProps) {
-      if (process.browser && !nextProps.githubUser) {
-        Router.push('/')
+      if (process.browser) {
+        if (!props.githubUser && !props.isRedirecting) {
+          window.location = getGithubAuthorizeUrl(
+            props.githubClientId,
+            props.nextUrl
+          )
+        }
       }
     }
 
     render () {
-      if (this.props.githubUser) {
-        return <Page {...this.props} />
+      if (this.context.githubUser) {
+        return <Page {...this.props} {...this.context} />
       }
 
       return null

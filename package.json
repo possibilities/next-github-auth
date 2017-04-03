@@ -13,19 +13,20 @@
     "lib"
   ],
   "dependencies": {
-    "axios": "^0.16.0"
+    "axios": "^0.16.0",
+    "prop-types": "^15.5.4"
   },
   "devDependencies": {
-    "babel-cli": "^6.24.0",
+    "babel-cli": "^6.24.1",
     "babel-eslint": "^7.1.1",
-    "babel-preset-latest": "^6.24.0",
-    "babel-preset-react": "^6.23.0",
-    "babel-preset-stage-0": "^6.22.0",
-    "next": "^2.0.1",
-    "react": "^15.4.2",
-    "react-dom": "^15.4.2",
+    "babel-preset-latest": "^6.24.1",
+    "babel-preset-react": "^6.24.1",
+    "babel-preset-stage-0": "^6.24.1",
+    "next": "^2.1.0",
+    "react": "^15.5.3",
+    "react-dom": "^15.5.3",
     "rimraf": "^2.6.1",
-    "standard": "^10.0.0"
+    "standard": "^10.0.1"
   },
   "peerDependencies": {
     "next": ">=2.0.0"
