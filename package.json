@@ -1,6 +1,6 @@
 {
   "name": "next-github-auth",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "scripts": {
     "dev": "rimraf lib && babel src --out-dir lib --watch",
     "build": "rimraf lib && babel src --out-dir lib",
