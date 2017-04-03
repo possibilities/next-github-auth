@@ -1,21 +1,17 @@
 import compose from '../modules/compose'
 
-import InjectEnvVars from './InjectEnvVars'
-import InjectGithubUser from './InjectGithubUser'
-import InjectGithubAccessToken from './InjectGithubAccessToken'
 import ProvideContext from './ProvideContext'
+import InjectEnvVars from './InjectEnvVars'
+import InjectGithubAccessToken from './InjectGithubAccessToken'
+import InjectGithubUser from './InjectGithubUser'
 import PageDecoratorInvariant from './PageDecoratorInvariant'
-
-const injectGithubClientId = InjectEnvVars({
-  GITHUB_CLIENT_ID: 'githubClientId'
-})
 
 const PublicPage = compose(
   ProvideContext,
-  injectGithubClientId,
+  InjectEnvVars({ GITHUB_CLIENT_ID: 'githubClientId' }),
   InjectGithubAccessToken,
   InjectGithubUser,
-  PageDecoratorInvariant
+  PageDecoratorInvariant('PublicPage')
 )
 
 export default PublicPage

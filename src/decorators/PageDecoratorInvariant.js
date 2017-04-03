@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import invariant from 'invariant'
 
-const PageDecoratorInvariant = (Page, decoratorName) => {
+const PageDecoratorInvariant = decoratorName => Page => {
   return class WrappedPage extends Component {
     static async getInitialProps (context) {
       const pageProps = Page.getInitialProps

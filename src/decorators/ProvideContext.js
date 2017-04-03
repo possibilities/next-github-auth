@@ -18,7 +18,7 @@ const ProvideGithubContext = Page => {
     getChildContext () {
       const {
         githubUser,
-        env: { githubClientId }
+        env: { githubClientId } = {}
       } = this.props
 
       return { githubUser, githubClientId }
