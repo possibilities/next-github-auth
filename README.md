@@ -1,10 +1,10 @@
 # Next.js auth with Github
 
-[![Greenkeeper badge](https://badges.greenkeeper.io/possibilities/next-github-auth.svg)](https://greenkeeper.io/)
-
 Components and decorators for using [Github](https://github.com) authentication with [Next.js](https://github.com/zeit/next.js)
 
 [![CircleCI](https://circleci.com/gh/possibilities/next-github-auth.svg?style=svg)](https://circleci.com/gh/possibilities/next-github-auth)
+
+[![Greenkeeper badge](https://badges.greenkeeper.io/possibilities/next-github-auth.svg)](https://greenkeeper.io/)
 
 ![screen](screen.gif "screen")
 
