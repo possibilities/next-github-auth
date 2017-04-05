@@ -4,7 +4,7 @@ const ProvideGithubContext = Page => {
   return class ProvideGithubContextWrapper extends Component {
     static async getInitialProps (pageContext) {
       return Page.getInitialProps
-        ? await Page.getInitialProps(pageContext)
+        ? Page.getInitialProps(pageContext)
         : {}
     }
 
