@@ -4,6 +4,8 @@ Components and decorators for using [Github](https://github.com) authentication 
 
 [![CircleCI](https://circleci.com/gh/possibilities/next-github-auth.svg?style=svg)](https://circleci.com/gh/possibilities/next-github-auth)
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/possibilities/next-github-auth.svg)](https://greenkeeper.io/)
+
 ![screen](screen.gif "screen")
 
 ## Usage
