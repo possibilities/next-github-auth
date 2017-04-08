@@ -33,7 +33,6 @@ cd ./example && ./run.sh
 
     ```
     yarn install
-    yarn build
     yarn link
     ```
 

@@ -21,8 +21,7 @@ Components and decorators for using [Github](https://github.com) authentication 
     At `pages/sign-in.js`
 
     ```
-    import { SignIn } from 'next-github-auth'
-    export default SignIn
+    import { SignIn } from 'next-github-auth' export default SignIn
     ```
 
     At `pages/sign-out.js`
@@ -41,7 +40,6 @@ Components and decorators for using [Github](https://github.com) authentication 
 
     const Private = props => <div>private page!</div>
     export default PrivatePage(Private)
-
     ```
 
 1. Wrap public pages with `PublicPage` decorator
@@ -53,11 +51,9 @@ Components and decorators for using [Github](https://github.com) authentication 
 
     const Public = props => <div>public page!</div>
     export default PublicPage(Public)
-
     ```
 
 1. Optionally access the currently signed in github user and access tokens via context, e.g:
-
 
     ```
     import React from 'react'
@@ -86,7 +82,6 @@ Components and decorators for using [Github](https://github.com) authentication 
     }
 
     export default PrivatePage(UserProfile)
-
     ```
 
 ## Setup app environment
