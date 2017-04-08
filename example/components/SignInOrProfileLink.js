@@ -10,11 +10,11 @@ const styles = {
 
 const signOutLink = <Link href='/sign-out'><a>sign out</a></Link>
 
-const SignInOrProfileLink = (props, { githubUser }) => {
+const SignInOrProfileLink = (props, { github }) => {
   return (
     <div style={styles}>
-      {githubUser
-        ? <div>hi {githubUser.login} ({signOutLink})</div>
+      {github.user
+        ? <div>hi {github.user.login} ({signOutLink})</div>
         : <Link href='/sign-in'><a>sign in</a></Link>
       }
     </div>
@@ -22,8 +22,10 @@ const SignInOrProfileLink = (props, { githubUser }) => {
 }
 
 SignInOrProfileLink.contextTypes = {
-  githubUser: PropTypes.shape({
-    login: PropTypes.string
+  github: PropTypes.shape({
+    user: PropTypes.shape({
+      login: PropTypes.string
+    })
   })
 }
 
