@@ -5,15 +5,27 @@ import InjectEnvVars from './InjectEnvVars'
 import InjectGithubAccessToken from './InjectGithubAccessToken'
 import InjectGithubUser from './InjectGithubUser'
 import DemandSignedIn from './DemandSignedIn'
-import PageDecoratorInvariant from './PageDecoratorInvariant'
 
-const PrivatePage = compose(
+let decorators = [
   InjectEnvVars({ GITHUB_CLIENT_ID: 'githubClientId' }),
   InjectGithubAccessToken,
-  InjectGithubUser,
-  PageDecoratorInvariant('PrivatePage'),
+  InjectGithubUser
+]
+
+if (process.env.NODE_ENV === 'development') {
+  const PageDecoratorInvariant = require('./PageDecoratorInvariant').default
+  decorators = [
+    ...decorators,
+    PageDecoratorInvariant('PrivatePage')
+  ]
+}
+
+decorators = [
+  ...decorators,
   ProvideContext,
   DemandSignedIn
-)
+]
+
+const PrivatePage = compose(...decorators)
 
 export default PrivatePage
