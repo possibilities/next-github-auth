@@ -8,9 +8,7 @@ const PageDecoratorInvariant = decoratorName => Page => {
         ? await Page.getInitialProps(nextPageContext)
         : {}
 
-      return process.env.NODE_ENV === 'development'
-        ? { ...pageProps, __isWrappingPageComponent: true }
-        : pageProps
+      return { ...pageProps, __isWrappingPageComponent: true }
     }
 
     constructor (props) {
@@ -22,6 +20,7 @@ const PageDecoratorInvariant = decoratorName => Page => {
     }
 
     render () {
+      console.log('invariant')
       return <Page {...this.props} />
     }
   }
