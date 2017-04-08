@@ -1,15 +1,27 @@
-import React, { Component, PropTypes } from 'react'
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 
 const ProvideGithubContext = Page => {
   return class ProvideGithubContextWrapper extends Component {
-    static async getInitialProps (pageContext) {
+    static async getInitialProps (nextPageContext) {
       return Page.getInitialProps
-        ? Page.getInitialProps(pageContext)
+        ? Page.getInitialProps(nextPageContext)
         : {}
     }
 
     static childContextTypes = {
       githubClientId: PropTypes.string,
+      githubAccessToken: PropTypes.string,
+      githubUser: PropTypes.shape({
+        login: PropTypes.string
+      })
+    }
+
+    static propTypes = {
+      env: PropTypes.shape({
+        githubClientId: PropTypes.string
+      }),
+      githubAccessToken: PropTypes.string,
       githubUser: PropTypes.shape({
         login: PropTypes.string
       })
@@ -18,10 +30,11 @@ const ProvideGithubContext = Page => {
     getChildContext () {
       const {
         githubUser,
+        githubAccessToken,
         env: { githubClientId } = {}
       } = this.props
 
-      return { githubUser, githubClientId }
+      return { githubUser, githubAccessToken, githubClientId }
     }
 
     render () {

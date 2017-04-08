@@ -1,4 +1,5 @@
-import { Component, PropTypes } from 'react'
+import { Component } from 'react'
+import PropTypes from 'prop-types'
 import Navigation from '../components/Navigation'
 import SignInOrProfileLink from '../components/SignInOrProfileLink'
 import { PrivatePage } from 'next-github-auth'
@@ -23,8 +24,8 @@ class Private extends Component {
     })).isRequired
   }
 
-  static async getInitialProps (pageContext) {
-    const { githubAccessToken } = pageContext
+  static async getInitialProps (nextPageContext) {
+    const { githubAccessToken } = nextPageContext
     const githubRepos = await getGithubRepos(githubAccessToken)
     const repos = githubRepos.map(repoView)
     return { repos }

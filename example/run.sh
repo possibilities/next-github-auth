@@ -7,13 +7,11 @@ set -e
 
 # install and link libray
 cd ..
-rm -rf ./node_modules
 yarn install
 yarn link
 
 # install and run app
 cd example
-rm -rf ./node_modules
 yarn install
 yarn link next-github-auth
 yarn dev

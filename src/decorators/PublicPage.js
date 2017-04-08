@@ -7,11 +7,11 @@ import InjectGithubUser from './InjectGithubUser'
 import PageDecoratorInvariant from './PageDecoratorInvariant'
 
 const PublicPage = compose(
-  ProvideContext,
   InjectEnvVars({ GITHUB_CLIENT_ID: 'githubClientId' }),
   InjectGithubAccessToken,
   InjectGithubUser,
-  PageDecoratorInvariant('PublicPage')
+  PageDecoratorInvariant('PublicPage'),
+  ProvideContext
 )
 
 export default PublicPage

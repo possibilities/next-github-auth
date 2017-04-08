@@ -56,32 +56,12 @@ Components and decorators for using [Github](https://github.com) authentication 
 
     ```
 
-1. Wrap `Link` components with the `PrivateLink` decorator
-
-    To force non-authenticated users to sign in before proceeding to any linked page decorate the `Link` component with `PrivateLink`, e.g.:
-
-    ```
-    import { PublicLink, PrivateLink } from 'next-github-auth'
-    import NextLink from 'next/link'
-
-    const Link = PrivateLink(NextLink)
-
-    const Public = props => (
-      <div>
-        <div>public page!</div>
-        <Link href='/secret'>secret page!</Link>
-      </div>
-    )
-
-    export default PublicPage(Public)
-
-    ```
-
 1. Optionally access the currently signed in github user and access tokens via context, e.g:
 
 
     ```
-    import React, { PropTypes } from 'react'
+    import React from 'react'
+    import PropTypes from 'prop-types'
     import { PrivatePage } from 'next-github-auth'
 
     const UserProfile = (props, {

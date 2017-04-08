@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react'
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import request from 'axios'
 import NextGlobalClientStore from '../modules/NextGlobalClientStore'
 
@@ -39,11 +40,11 @@ const InjectGithubUser = Page => {
       })
     }
 
-    static async getInitialProps (pageContext) {
-      const { githubAccessToken } = pageContext
+    static async getInitialProps (nextPageContext) {
+      const { githubAccessToken } = nextPageContext
       const githubUser = await getGithubUser(githubAccessToken)
       const pageProps = Page.getInitialProps
-        ? await Page.getInitialProps({ ...pageContext, githubUser })
+        ? await Page.getInitialProps({ ...nextPageContext, githubUser })
         : {}
       return { ...pageProps, githubUser }
     }
@@ -51,35 +52,13 @@ const InjectGithubUser = Page => {
     constructor (props) {
       super(props)
 
-      this.state = {
-        githubUser: props.githubUser
-      }
-
       if (process.browser) {
         NextGlobalClientStore.set('githubUser', props.githubUser)
       }
     }
 
-    componentWillMount () {
-      if (process.browser) {
-        const { githubUser } = this.props
-        const serializedUser = githubUser ? JSON.stringify(githubUser) : null
-        window.localStorage.setItem('githubUser', serializedUser)
-        window.onstorage = ({ key, newValue = null }) => {
-          if (key === 'githubUser') {
-            this.setState({
-              githubUser: newValue ? JSON.parse(newValue) : null
-            })
-          }
-        }
-      }
-    }
-
-    componentWillUnmount () {
-    }
-
     render () {
-      return <Page {...this.props} githubUser={this.state.githubUser} />
+      return <Page {...this.props} />
     }
   }
 }

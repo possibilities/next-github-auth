@@ -15,13 +15,15 @@ const loadEnvironmentVars = namesToAliases => {
 
 const InjectEnvVars = namesToAliases => Page => {
   return class InjectEnvVarsWrapper extends Component {
-    static async getInitialProps (pageContext) {
+    static async getInitialProps (nextPageContext) {
       const env = process.browser
         ? NextGlobalClientStore.get('env')
         : loadEnvironmentVars(namesToAliases)
 
+      const envAndContext = { ...nextPageContext, env }
+
       const pageProps = Page.getInitialProps
-        ? await Page.getInitialProps({ ...pageContext, env })
+        ? await Page.getInitialProps(envAndContext)
         : {}
 
       return { ...pageProps, env }

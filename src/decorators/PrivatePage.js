@@ -8,12 +8,12 @@ import DemandSignedIn from './DemandSignedIn'
 import PageDecoratorInvariant from './PageDecoratorInvariant'
 
 const PrivatePage = compose(
-  ProvideContext,
   InjectEnvVars({ GITHUB_CLIENT_ID: 'githubClientId' }),
   InjectGithubAccessToken,
   InjectGithubUser,
-  DemandSignedIn,
-  PageDecoratorInvariant('PrivatePage')
+  PageDecoratorInvariant('PrivatePage'),
+  ProvideContext,
+  DemandSignedIn
 )
 
 export default PrivatePage

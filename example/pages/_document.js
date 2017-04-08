@@ -5,9 +5,9 @@ const resetCssUrl =
   'https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css'
 
 class Root extends Document {
-  static async getInitialProps (pageContext) {
-    const props = await super.getInitialProps(pageContext)
-    const page = pageContext.renderPage()
+  static async getInitialProps (nextPageContext) {
+    const props = await super.getInitialProps(nextPageContext)
+    const page = nextPageContext.renderPage()
     return { ...props, ...page }
   }
 
