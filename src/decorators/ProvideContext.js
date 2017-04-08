@@ -3,9 +3,9 @@ import PropTypes from 'prop-types'
 
 const ProvideGithubContext = Page => {
   return class ProvideGithubContextWrapper extends Component {
-    static async getInitialProps (nextPageContext) {
+    static async getInitialProps (pageContext) {
       return Page.getInitialProps
-        ? Page.getInitialProps(nextPageContext)
+        ? Page.getInitialProps(pageContext)
         : {}
     }
 

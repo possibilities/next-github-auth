@@ -18,11 +18,11 @@ const getGithubAccessToken = req => {
 
 const InjectGithubAccessToken = Page => {
   return class InjectGithubAccessTokenWrapper extends Component {
-    static async getInitialProps (nextPageContext) {
-      const { req } = nextPageContext
+    static async getInitialProps (pageContext) {
+      const { req } = pageContext
       const githubAccessToken = getGithubAccessToken(req)
       const pageProps = Page.getInitialProps
-        ? await Page.getInitialProps({ ...nextPageContext, githubAccessToken })
+        ? await Page.getInitialProps({ ...pageContext, githubAccessToken })
         : {}
       return { ...pageProps, githubAccessToken }
     }

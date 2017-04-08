@@ -40,11 +40,11 @@ const InjectGithubUser = Page => {
       })
     }
 
-    static async getInitialProps (nextPageContext) {
-      const { githubAccessToken } = nextPageContext
+    static async getInitialProps (pageContext) {
+      const { githubAccessToken } = pageContext
       const githubUser = await getGithubUser(githubAccessToken)
       const pageProps = Page.getInitialProps
-        ? await Page.getInitialProps({ ...nextPageContext, githubUser })
+        ? await Page.getInitialProps({ ...pageContext, githubUser })
         : {}
       return { ...pageProps, githubUser }
     }

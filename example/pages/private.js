@@ -24,8 +24,7 @@ class Private extends Component {
     })).isRequired
   }
 
-  static async getInitialProps (nextPageContext) {
-    const { githubAccessToken } = nextPageContext
+  static async getInitialProps ({ githubAccessToken }) {
     const githubRepos = await getGithubRepos(githubAccessToken)
     const repos = githubRepos.map(repoView)
     return { repos }

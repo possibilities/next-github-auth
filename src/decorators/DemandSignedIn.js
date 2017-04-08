@@ -18,8 +18,8 @@ const DemandSignedIn = Page => {
       })
     }
 
-    static async getInitialProps (nextPageContext) {
-      const { env: { githubClientId }, pathname, githubUser } = nextPageContext
+    static async getInitialProps (pageContext) {
+      const { env: { githubClientId }, pathname, githubUser } = pageContext
 
       if (!githubUser) {
         if (process.browser) {
@@ -30,11 +30,11 @@ const DemandSignedIn = Page => {
         }
       }
 
-      const githubAccessToken = nextPageContext.githubAccessToken
+      const githubAccessToken = pageContext.githubAccessToken
 
       const pageProps = Page.getInitialProps
         ? await Page.getInitialProps({
-          ...nextPageContext,
+          ...pageContext,
           githubUser,
           githubAccessToken
         })
