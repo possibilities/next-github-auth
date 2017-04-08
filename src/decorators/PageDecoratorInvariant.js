@@ -3,9 +3,9 @@ import invariant from 'invariant'
 
 const PageDecoratorInvariant = decoratorName => Page => {
   return class WrappedPage extends Component {
-    static async getInitialProps (context) {
+    static async getInitialProps (nextPageContext) {
       const pageProps = Page.getInitialProps
-        ? await Page.getInitialProps(context)
+        ? await Page.getInitialProps(nextPageContext)
         : {}
 
       return process.env.NODE_ENV === 'development'

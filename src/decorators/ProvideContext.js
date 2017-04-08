@@ -10,10 +10,12 @@ const ProvideGithubContext = Page => {
     }
 
     static childContextTypes = {
-      githubClientId: PropTypes.string,
-      githubAccessToken: PropTypes.string,
-      githubUser: PropTypes.shape({
-        login: PropTypes.string
+      github: PropTypes.shape({
+        user: PropTypes.shape({
+          login: PropTypes.string
+        }),
+        accessToken: PropTypes.string,
+        clientId: PropTypes.string
       })
     }
 
@@ -34,7 +36,13 @@ const ProvideGithubContext = Page => {
         env: { githubClientId } = {}
       } = this.props
 
-      return { githubUser, githubAccessToken, githubClientId }
+      return {
+        github: {
+          user: githubUser,
+          accessToken: githubAccessToken,
+          clientId: githubClientId
+        }
+      }
     }
 
     render () {

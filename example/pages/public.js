@@ -2,7 +2,7 @@ import Navigation from '../components/Navigation'
 import SignInOrProfileLink from '../components/SignInOrProfileLink'
 import { PublicPage } from 'next-github-auth'
 
-const Public = (props, context) => (
+const Public = () => (
   <div>
     <Navigation />
     <SignInOrProfileLink />

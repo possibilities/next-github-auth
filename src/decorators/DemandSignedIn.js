@@ -11,8 +11,10 @@ const DemandSignedIn = Page => {
     }
 
     static contextTypes = {
-      githubUser: PropTypes.shape({
-        login: PropTypes.string.isRequired
+      github: PropTypes.shape({
+        user: PropTypes.shape({
+          login: PropTypes.string.isRequired
+        })
       })
     }
 
@@ -60,7 +62,7 @@ const DemandSignedIn = Page => {
     }
 
     render () {
-      if (this.context.githubUser) {
+      if (this.context.github.user) {
         return <Page {...this.props} {...this.context} />
       }
 
