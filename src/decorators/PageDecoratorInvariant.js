@@ -20,7 +20,6 @@ const PageDecoratorInvariant = decoratorName => Page => {
     }
 
     render () {
-      console.log('invariant')
       return <Page {...this.props} />
     }
   }
