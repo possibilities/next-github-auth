@@ -160,10 +160,10 @@ axios@^0.15.3:
     follow-redirects "1.0.0"
 
 axios@^0.16.0:
-  version "0.16.0"
-  resolved "https://registry.yarnpkg.com/axios/-/axios-0.16.0.tgz#6ed9771d815f429e7510f2838262957c4953d3b6"
+  version "0.16.1"
+  resolved "https://registry.yarnpkg.com/axios/-/axios-0.16.1.tgz#c0b6d26600842384b8f509e57111f0d2df8223ca"
   dependencies:
-    follow-redirects "1.0.0"
+    follow-redirects "^1.2.3"
 
 babel-code-frame@^6.20.0, babel-code-frame@^6.22.0:
   version "6.22.0"
@@ -817,11 +817,11 @@ babel-types@^6.19.0, babel-types@^6.21.0, babel-types@^6.23.0, babel-types@^6.24
     lodash "^4.2.0"
     to-fast-properties "^1.0.1"
 
-babylon@6.14.1, babylon@^6.11.0:
+babylon@6.14.1:
   version "6.14.1"
   resolved "https://registry.yarnpkg.com/babylon/-/babylon-6.14.1.tgz#956275fab72753ad9b3435d7afe58f8bf0a29815"
 
-babylon@^6.15.0:
+babylon@^6.11.0, babylon@^6.15.0:
   version "6.16.1"
   resolved "https://registry.yarnpkg.com/babylon/-/babylon-6.16.1.tgz#30c5a22f481978a9e7f8cdfdf496b11d94b404d3"
 
@@ -1063,9 +1063,13 @@ constants-browserify@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/constants-browserify/-/constants-browserify-1.0.0.tgz#c20b96d8c617748aaf1c16021760cd27fcb8cb75"
 
-convert-source-map@1.3.0, convert-source-map@^1.1.0:
+convert-source-map@1.3.0:
   version "1.3.0"
   resolved "https://registry.yarnpkg.com/convert-source-map/-/convert-source-map-1.3.0.tgz#e9f3e9c6e2728efc2676696a70eb382f73106a67"
+
+convert-source-map@^1.1.0:
+  version "1.5.0"
+  resolved "https://registry.yarnpkg.com/convert-source-map/-/convert-source-map-1.5.0.tgz#9acd70851c6d5dfdd93d9282e5edf94a03ff46b5"
 
 core-js@^1.0.0:
   version "1.2.7"
@@ -1147,7 +1151,7 @@ debug@2.6.1:
   dependencies:
     ms "0.7.2"
 
-debug@^2.1.1, debug@^2.2.0:
+debug@^2.1.1, debug@^2.2.0, debug@^2.4.5:
   version "2.6.3"
   resolved "https://registry.yarnpkg.com/debug/-/debug-2.6.3.tgz#0f7eb8c30965ec08c72accfa0130c8b79984141d"
   dependencies:
@@ -1420,6 +1424,12 @@ follow-redirects@1.0.0:
   resolved "https://registry.yarnpkg.com/follow-redirects/-/follow-redirects-1.0.0.tgz#8e34298cbd2e176f254effec75a1c78cc849fd37"
   dependencies:
     debug "^2.2.0"
+
+follow-redirects@^1.2.3:
+  version "1.2.3"
+  resolved "https://registry.yarnpkg.com/follow-redirects/-/follow-redirects-1.2.3.tgz#01abaeca85e3609837d9fcda3167a7e42fdaca21"
+  dependencies:
+    debug "^2.4.5"
 
 for-in@^1.0.1:
   version "1.0.2"
@@ -2142,12 +2152,12 @@ ncp@~2.0.0:
   resolved "https://registry.yarnpkg.com/ncp/-/ncp-2.0.0.tgz#195a21d6c46e361d2fb1281ba38b91e9df7bdbb3"
 
 "next-github-auth@file:..":
-  version "0.1.4"
+  version "0.1.7"
   dependencies:
     axios "^0.16.0"
     prop-types "^15.5.4"
 
-next@^2.0.0:
+next@^2.1.1:
   version "2.1.1"
   resolved "https://registry.yarnpkg.com/next/-/next-2.1.1.tgz#d23f18e3cdda2ce110bd2a449ad013e855e59f83"
   dependencies:
@@ -2564,7 +2574,7 @@ react-deep-force-update@^2.0.1:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/react-deep-force-update/-/react-deep-force-update-2.0.1.tgz#4f7f6c12c3e7de42f345992a3c518236fa1ecad3"
 
-react-dom@^15.4.2:
+react-dom@^15.5.3:
   version "15.5.3"
   resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-15.5.3.tgz#2ee127ce942df55da53111ae303316e68072b5c5"
   dependencies:
@@ -2590,7 +2600,7 @@ react-proxy@^3.0.0-alpha.0:
   dependencies:
     lodash "^4.6.1"
 
-react@^15.4.2:
+react@^15.5.3:
   version "15.5.3"
   resolved "https://registry.yarnpkg.com/react/-/react-15.5.3.tgz#84055382c025dec4e3b902bb61a8697cc79c1258"
   dependencies:
