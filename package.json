@@ -1,7 +1,7 @@
 {
   "name": "next-github-auth",
   "description": "Components and decorators for using Github authentication with Next.js",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "repository": {
     "url": "https://github.com/possibilities/next-github-auth",
     "type": "git"
