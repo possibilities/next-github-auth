@@ -1,6 +1,13 @@
 {
   "name": "next-github-auth",
+  "description": "Components and decorators for using Github authentication with Next.js",
   "version": "0.1.3",
+  "repository": {
+    "url": "https://github.com/possibilities/next-github-auth",
+    "type": "git"
+  },
+  "author": "Mike Bannister <mikebannister@gmail.com>",
+  "license": "MIT",
   "scripts": {
     "dev": "rimraf lib && babel src --out-dir lib --watch",
     "build": "rimraf lib && babel src --out-dir lib",
