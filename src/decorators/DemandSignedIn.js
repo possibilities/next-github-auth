@@ -10,60 +10,49 @@ const DemandSignedIn = Page => {
       }).isRequired
     }
 
-    static contextTypes = {
-      github: PropTypes.shape({
-        user: PropTypes.shape({
-          login: PropTypes.string.isRequired
-        })
-      })
-    }
+    static async getInitialProps (pageContext) {
+      const {
+        env: { githubClientId },
+        pathname: afterSignInUrl,
+        github
+      } = pageContext
 
-    static async getInitialProps (nextPageContext) {
-      const { env: { githubClientId }, pathname, githubUser } = nextPageContext
-
-      if (!githubUser) {
+      if (!github.user) {
         if (process.browser) {
-          window.location = getGithubAuthorizeUrl(githubClientId, pathname)
+          window.location = getGithubAuthorizeUrl(githubClientId, afterSignInUrl)
           return { isRedirecting: true }
         } else {
-          return { nextUrl: pathname, githubClientId }
+          return { afterSignInUrl, githubClientId }
         }
       }
 
-      const githubAccessToken = nextPageContext.githubAccessToken
-
       const pageProps = Page.getInitialProps
-        ? await Page.getInitialProps({
-          ...nextPageContext,
-          githubUser,
-          githubAccessToken
-        })
+        ? await Page.getInitialProps({ ...pageContext, github })
         : {}
 
       return {
         ...pageProps,
+        github,
         githubClientId,
-        githubUser,
-        githubAccessToken,
-        nextUrl: pathname
+        afterSignInUrl
       }
     }
 
     constructor (props) {
       super(props)
       if (process.browser) {
-        if (!props.githubUser && !props.isRedirecting) {
+        if (!props.github.user && !props.isRedirecting) {
           window.location = getGithubAuthorizeUrl(
             props.githubClientId,
-            props.nextUrl
+            props.afterSignInUrl
           )
         }
       }
     }
 
     render () {
-      if (this.context.github.user) {
-        return <Page {...this.props} {...this.context} />
+      if (this.props.github.user) {
+        return <Page {...this.props} />
       }
 
       return null

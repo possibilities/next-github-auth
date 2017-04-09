@@ -1,15 +1,9 @@
 import compose from '../modules/compose'
 
-import ProvideContext from './ProvideContext'
-import InjectEnvVars from './InjectEnvVars'
-import InjectGithubAccessToken from './InjectGithubAccessToken'
-import InjectGithubUser from './InjectGithubUser'
+import EnvironmentVariables from './EnvironmentVariables'
+import GithubContext from './GithubContext'
 
-let decorators = [
-  InjectEnvVars({ GITHUB_CLIENT_ID: 'githubClientId' }),
-  InjectGithubAccessToken,
-  InjectGithubUser
-]
+let decorators = []
 
 if (process.env.NODE_ENV === 'development') {
   const PageDecoratorInvariant = require('./PageDecoratorInvariant').default
@@ -21,7 +15,8 @@ if (process.env.NODE_ENV === 'development') {
 
 decorators = [
   ...decorators,
-  ProvideContext
+  EnvironmentVariables({ GITHUB_CLIENT_ID: 'githubClientId' }),
+  GithubContext
 ]
 
 const PublicPage = compose(...decorators)
