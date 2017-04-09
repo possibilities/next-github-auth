@@ -50,25 +50,25 @@ const getGithubUser = async githubAccessToken => {
 const GithubContext = Page => {
   return class GithubContextWrapper extends Component {
     static propTypes = {
-      githubUser: PropTypes.shape({
-        login: PropTypes.string.isRequired
+      github: PropTypes.shape({
+        user: PropTypes.shape({
+          login: PropTypes.string.isRequired
+        }),
+        accessToken: PropTypes.string
       })
     }
 
     static async getInitialProps (pageContext) {
       const { req } = pageContext
-      const githubAccessToken = getGithubAccessToken(req)
-      const githubUser = await getGithubUser(githubAccessToken)
+      const accessToken = getGithubAccessToken(req)
+      const user = await getGithubUser(accessToken)
+      const github = { accessToken, user }
 
       const pageProps = Page.getInitialProps
-        ? await Page.getInitialProps({
-          ...pageContext,
-          githubUser,
-          githubAccessToken
-        })
+        ? await Page.getInitialProps({ ...pageContext, github })
         : {}
 
-      return { ...pageProps, githubUser, githubAccessToken }
+      return { ...pageProps, github }
     }
 
     static childContextTypes = {
@@ -82,16 +82,11 @@ const GithubContext = Page => {
     }
 
     getChildContext () {
-      const {
-        githubUser,
-        githubAccessToken,
-        env: { githubClientId } = {}
-      } = this.props
+      const { github, env: { githubClientId } = {} } = this.props
 
       return {
         github: {
-          user: githubUser,
-          accessToken: githubAccessToken,
+          ...github,
           clientId: githubClientId
         }
       }
@@ -101,8 +96,8 @@ const GithubContext = Page => {
       super(props)
 
       if (process.browser) {
-        NextGlobalClientStore.set('githubUser', props.githubUser)
-        NextGlobalClientStore.set('githubAccessToken', props.githubAccessToken)
+        NextGlobalClientStore.set('githubUser', props.github.user)
+        NextGlobalClientStore.set('githubAccessToken', props.github.accessToken)
       }
     }
 

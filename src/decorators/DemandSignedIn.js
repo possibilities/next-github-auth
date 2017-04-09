@@ -14,10 +14,10 @@ const DemandSignedIn = Page => {
       const {
         env: { githubClientId },
         pathname: afterSignInUrl,
-        githubUser
+        github
       } = pageContext
 
-      if (!githubUser) {
+      if (!github.user) {
         if (process.browser) {
           window.location = getGithubAuthorizeUrl(githubClientId, afterSignInUrl)
           return { isRedirecting: true }
@@ -26,21 +26,14 @@ const DemandSignedIn = Page => {
         }
       }
 
-      const githubAccessToken = pageContext.githubAccessToken
-
       const pageProps = Page.getInitialProps
-        ? await Page.getInitialProps({
-          ...pageContext,
-          githubUser,
-          githubAccessToken
-        })
+        ? await Page.getInitialProps({ ...pageContext, github })
         : {}
 
       return {
         ...pageProps,
+        github,
         githubClientId,
-        githubUser,
-        githubAccessToken,
         afterSignInUrl
       }
     }
@@ -48,7 +41,7 @@ const DemandSignedIn = Page => {
     constructor (props) {
       super(props)
       if (process.browser) {
-        if (!props.githubUser && !props.isRedirecting) {
+        if (!props.github.user && !props.isRedirecting) {
           window.location = getGithubAuthorizeUrl(
             props.githubClientId,
             props.afterSignInUrl
@@ -58,7 +51,7 @@ const DemandSignedIn = Page => {
     }
 
     render () {
-      if (this.props.githubUser) {
+      if (this.props.github.user) {
         return <Page {...this.props} />
       }
 
