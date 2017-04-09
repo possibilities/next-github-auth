@@ -80,6 +80,43 @@ Components and decorators for using [Github](https://github.com) authentication 
     export default PrivatePage(UserProfile)
     ```
 
+1. Optionally access the currently signed in github user and access tokens via `getInitialProps` "page context", e.g:
+
+    ```
+    import React from 'react'
+    import PropTypes from 'prop-types'
+    import { PrivatePage } from 'next-github-auth'
+
+    const UserRepos = ({
+      github: {
+        accessToken,
+        user: { login }
+      }
+    }) => (
+      <div>
+        {!repos.length && (
+          <div>cool, you have 0 repos!</div>
+        )}
+
+        {!!repos.length && (
+          <ul style={{ margin: 0 }}>
+            {repos.map(({ fullName }) => (
+              <li key={fullName}>{fullName}</li>
+            ))}
+          </ul>
+        )}
+      </div>
+    )
+
+    UserRepos.getInitialProps ({ github: { accessToken } }) {
+      const githubRepos = await getGithubRepos(accessToken)
+      const repos = githubRepos.map(repoView)
+      return { repos }
+    }
+
+    export default PrivatePage(UserProfile)
+    ```
+
 ## Setup app environment
 
 1. [Add an OAuth application](https://github.com/settings/developers) to your Github account to generate a client id and secret
