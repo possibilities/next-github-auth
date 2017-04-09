@@ -47,8 +47,8 @@ const getGithubUser = async githubAccessToken => {
   }
 }
 
-const InjectGithubContext = Page => {
-  return class InjectGithubContextWrapper extends Component {
+const GithubContext = Page => {
+  return class GithubContextWrapper extends Component {
     static propTypes = {
       githubUser: PropTypes.shape({
         login: PropTypes.string.isRequired
@@ -112,4 +112,4 @@ const InjectGithubContext = Page => {
   }
 }
 
-export default InjectGithubContext
+export default GithubContext

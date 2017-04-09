@@ -1,7 +1,7 @@
 import compose from '../modules/compose'
 
-import InjectEnvVars from './InjectEnvVars'
-import InjectGithubContext from './InjectGithubContext'
+import EnvironmentVariables from './EnvironmentVariables'
+import GithubContext from './GithubContext'
 
 let decorators = []
 
@@ -15,8 +15,8 @@ if (process.env.NODE_ENV === 'development') {
 
 decorators = [
   ...decorators,
-  InjectEnvVars({ GITHUB_CLIENT_ID: 'githubClientId' }),
-  InjectGithubContext
+  EnvironmentVariables({ GITHUB_CLIENT_ID: 'githubClientId' }),
+  GithubContext
 ]
 
 const PublicPage = compose(...decorators)
