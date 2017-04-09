@@ -2,8 +2,7 @@ import compose from '../modules/compose'
 
 import ProvideContext from './ProvideContext'
 import InjectEnvVars from './InjectEnvVars'
-import InjectGithubAccessToken from './InjectGithubAccessToken'
-import InjectGithubUser from './InjectGithubUser'
+import InjectGithub from './InjectGithub'
 import DemandSignedIn from './DemandSignedIn'
 
 let decorators = []
@@ -19,8 +18,7 @@ if (process.env.NODE_ENV === 'development') {
 decorators = [
   ...decorators,
   InjectEnvVars({ GITHUB_CLIENT_ID: 'githubClientId' }),
-  InjectGithubAccessToken,
-  InjectGithubUser,
+  InjectGithub,
   ProvideContext,
   DemandSignedIn
 ]

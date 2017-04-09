@@ -3,6 +3,21 @@ import PropTypes from 'prop-types'
 import request from 'axios'
 import NextGlobalClientStore from '../modules/NextGlobalClientStore'
 
+const getGithubAccessToken = req => {
+  if (process.browser) {
+    return NextGlobalClientStore.get('githubAccessToken')
+  } else {
+    const accessTokenCookie = req.headers.cookie && req.headers.cookie
+      .split(';')
+      .map(c => c.trim())
+      .find(c => c.startsWith('githubAccessToken='))
+
+    if (accessTokenCookie) {
+      return accessTokenCookie.split('=').pop()
+    }
+  }
+}
+
 const getGithubUser = async githubAccessToken => {
   if (!githubAccessToken) {
     return
@@ -32,8 +47,8 @@ const getGithubUser = async githubAccessToken => {
   }
 }
 
-const InjectGithubUser = Page => {
-  return class InjectGithubUserWrapper extends Component {
+const InjectGithub = Page => {
+  return class InjectGithubWrapper extends Component {
     static propTypes = {
       githubUser: PropTypes.shape({
         login: PropTypes.string.isRequired
@@ -41,12 +56,19 @@ const InjectGithubUser = Page => {
     }
 
     static async getInitialProps (pageContext) {
-      const { githubAccessToken } = pageContext
+      const { req } = pageContext
+      const githubAccessToken = getGithubAccessToken(req)
       const githubUser = await getGithubUser(githubAccessToken)
+
       const pageProps = Page.getInitialProps
-        ? await Page.getInitialProps({ ...pageContext, githubUser })
+        ? await Page.getInitialProps({
+          ...pageContext,
+          githubUser,
+          githubAccessToken
+        })
         : {}
-      return { ...pageProps, githubUser }
+
+      return { ...pageProps, githubUser, githubAccessToken }
     }
 
     constructor (props) {
@@ -54,6 +76,7 @@ const InjectGithubUser = Page => {
 
       if (process.browser) {
         NextGlobalClientStore.set('githubUser', props.githubUser)
+        NextGlobalClientStore.set('githubAccessToken', props.githubAccessToken)
       }
     }
 
@@ -63,4 +86,4 @@ const InjectGithubUser = Page => {
   }
 }
 
-export default InjectGithubUser
+export default InjectGithub
