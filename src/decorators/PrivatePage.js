@@ -6,11 +6,7 @@ import InjectGithubAccessToken from './InjectGithubAccessToken'
 import InjectGithubUser from './InjectGithubUser'
 import DemandSignedIn from './DemandSignedIn'
 
-let decorators = [
-  InjectEnvVars({ GITHUB_CLIENT_ID: 'githubClientId' }),
-  InjectGithubAccessToken,
-  InjectGithubUser
-]
+let decorators = []
 
 if (process.env.NODE_ENV === 'development') {
   const PageDecoratorInvariant = require('./PageDecoratorInvariant').default
@@ -22,6 +18,9 @@ if (process.env.NODE_ENV === 'development') {
 
 decorators = [
   ...decorators,
+  InjectEnvVars({ GITHUB_CLIENT_ID: 'githubClientId' }),
+  InjectGithubAccessToken,
+  InjectGithubUser,
   ProvideContext,
   DemandSignedIn
 ]
