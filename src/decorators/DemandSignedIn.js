@@ -10,14 +10,6 @@ const DemandSignedIn = Page => {
       }).isRequired
     }
 
-    static contextTypes = {
-      github: PropTypes.shape({
-        user: PropTypes.shape({
-          login: PropTypes.string.isRequired
-        })
-      })
-    }
-
     static async getInitialProps (pageContext) {
       const { env: { githubClientId }, pathname, githubUser } = pageContext
 
@@ -62,8 +54,8 @@ const DemandSignedIn = Page => {
     }
 
     render () {
-      if (this.context.github.user) {
-        return <Page {...this.props} {...this.context} />
+      if (this.props.githubUser) {
+        return <Page {...this.props} />
       }
 
       return null
