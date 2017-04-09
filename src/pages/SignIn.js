@@ -4,7 +4,7 @@ import request from 'axios'
 import demandEnvVar from '../modules/demandEnvVar'
 import getGithubAccessTokenCookie from '../modules/getGithubAccessTokenCookie'
 import getGithubAuthorizeUrl from '../modules/getGithubAuthorizeUrl'
-import EnvironmentVariables from '../decorators/EnvironmentVariables'
+import PublicPage from '../decorators/PublicPage'
 
 const githubAccessTokenUrl = 'https://github.com/login/oauth/access_token'
 const githubClientSecret = demandEnvVar('GITHUB_CLIENT_SECRET')
@@ -84,8 +84,4 @@ class SignIn extends Component {
   }
 }
 
-const environmentVariables = EnvironmentVariables({
-  GITHUB_CLIENT_ID: 'githubClientId'
-})
-
-export default environmentVariables(SignIn)
+export default PublicPage(SignIn)
