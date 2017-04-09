@@ -11,14 +11,18 @@ const DemandSignedIn = Page => {
     }
 
     static async getInitialProps (pageContext) {
-      const { env: { githubClientId }, pathname, githubUser } = pageContext
+      const {
+        env: { githubClientId },
+        pathname: nextUrl,
+        githubUser
+      } = pageContext
 
       if (!githubUser) {
         if (process.browser) {
-          window.location = getGithubAuthorizeUrl(githubClientId, pathname)
+          window.location = getGithubAuthorizeUrl(githubClientId, nextUrl)
           return { isRedirecting: true }
         } else {
-          return { nextUrl: pathname, githubClientId }
+          return { nextUrl, githubClientId }
         }
       }
 
@@ -37,7 +41,7 @@ const DemandSignedIn = Page => {
         githubClientId,
         githubUser,
         githubAccessToken,
-        nextUrl: pathname
+        nextUrl
       }
     }
 
