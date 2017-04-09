@@ -71,6 +71,32 @@ const InjectGithub = Page => {
       return { ...pageProps, githubUser, githubAccessToken }
     }
 
+    static childContextTypes = {
+      github: PropTypes.shape({
+        user: PropTypes.shape({
+          login: PropTypes.string
+        }),
+        accessToken: PropTypes.string,
+        clientId: PropTypes.string
+      })
+    }
+
+    getChildContext () {
+      const {
+        githubUser,
+        githubAccessToken,
+        env: { githubClientId } = {}
+      } = this.props
+
+      return {
+        github: {
+          user: githubUser,
+          accessToken: githubAccessToken,
+          clientId: githubClientId
+        }
+      }
+    }
+
     constructor (props) {
       super(props)
 

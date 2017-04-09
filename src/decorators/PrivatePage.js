@@ -1,6 +1,5 @@
 import compose from '../modules/compose'
 
-import ProvideContext from './ProvideContext'
 import InjectEnvVars from './InjectEnvVars'
 import InjectGithub from './InjectGithub'
 import DemandSignedIn from './DemandSignedIn'
@@ -19,7 +18,6 @@ decorators = [
   ...decorators,
   InjectEnvVars({ GITHUB_CLIENT_ID: 'githubClientId' }),
   InjectGithub,
-  ProvideContext,
   DemandSignedIn
 ]
 
