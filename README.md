@@ -68,7 +68,7 @@ Components and decorators for using [Github](https://github.com) authentication 
       </div>
     )
 
-    SignInOrProfileLink.contextTypes = {
+    UserProfile.contextTypes = {
       github: PropTypes.shape({
         accessToken: PropTypes.string,
         user: PropTypes.shape({
