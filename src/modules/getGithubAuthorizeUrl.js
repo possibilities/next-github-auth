@@ -6,28 +6,28 @@ const queryStringFromObj = queryObj =>
     .map(key => `${key}=${queryObj[key]}`)
     .join('&')
 
-const getRedirectUri = (githubClientId, nextUrl) => {
+const getRedirectUri = (githubClientId, afterSignInUrl) => {
   if (!process.browser) {
     return
   }
 
   let afterAuthUrl = `${window.location.origin}/sign-in`
 
-  if (nextUrl && nextUrl !== '/sign-in') {
-    afterAuthUrl = `${afterAuthUrl}?nextUrl=${nextUrl}`
+  if (afterSignInUrl && afterSignInUrl !== '/sign-in') {
+    afterAuthUrl = `${afterAuthUrl}?afterSignInUrl=${afterSignInUrl}`
   }
 
   return encodeURIComponent(afterAuthUrl)
 }
 
-const getGithubAuthorizeUrl = (githubClientId, nextUrl) => {
+const getGithubAuthorizeUrl = (githubClientId, afterSignInUrl) => {
   if (!githubClientId) {
     throw new Error('Client id is not defined')
   }
 
   const githubAuthorizeParams = queryStringFromObj({
     client_id: githubClientId,
-    redirect_uri: getRedirectUri(githubClientId, nextUrl),
+    redirect_uri: getRedirectUri(githubClientId, afterSignInUrl),
     scope: 'repo'
   })
 

@@ -32,7 +32,7 @@ const fetchGithubAccessToken = async (githubAuthCode, githubClientId) => {
 class SignIn extends Component {
   static propTypes = {
     githubClientId: PropTypes.string.isRequired,
-    nextUrl: PropTypes.string.isRequired,
+    afterSignInUrl: PropTypes.string.isRequired,
     isAuthorized: PropTypes.bool.isRequired
   }
 
@@ -43,7 +43,7 @@ class SignIn extends Component {
       githubClientId
     },
     query: {
-      nextUrl = '/',
+      afterSignInUrl = '/',
       code: githubAuthCode
     }
   }) {
@@ -60,20 +60,20 @@ class SignIn extends Component {
       isAuthorized = !!accessToken
     }
 
-    return { githubClientId, nextUrl, isAuthorized }
+    return { githubClientId, afterSignInUrl, isAuthorized }
   }
 
   constructor (props) {
     super(props)
 
-    const { nextUrl, isAuthorized, githubClientId } = props
+    const { afterSignInUrl, isAuthorized, githubClientId } = props
 
-    if (process.browser && nextUrl) {
+    if (process.browser && afterSignInUrl) {
       if (isAuthorized) {
         // Wait to redirect on the client so the cookie will be available
-        window.location = nextUrl
+        window.location = afterSignInUrl
       } else {
-        window.location = getGithubAuthorizeUrl(githubClientId, nextUrl)
+        window.location = getGithubAuthorizeUrl(githubClientId, afterSignInUrl)
       }
     }
   }
