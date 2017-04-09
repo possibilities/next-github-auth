@@ -14,22 +14,22 @@ const Navigation = () => {
 
   return (
     <div>
-      <ul style={listStyle}>
+      <ul className='nav' style={listStyle}>
         <li style={itemStyle}>
           <Link href='/'>
-            <a>home</a>
+            <a className='home'>home</a>
           </Link>
           &nbsp; | &nbsp;
         </li>
         <li style={itemStyle}>
           <Link href='/public'>
-            <a>public page</a>
+            <a className='public'>public page</a>
           </Link>
           &nbsp; | &nbsp;
         </li>
         <li style={itemStyle}>
           <Link href='/private'>
-            <a>private page</a>
+            <a className='private'>private page</a>
           </Link>
         </li>
       </ul>
