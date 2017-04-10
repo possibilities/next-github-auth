@@ -12,8 +12,10 @@
     "dev": "rimraf lib && babel src --out-dir lib --watch",
     "build": "rimraf lib && babel src --out-dir lib",
     "prepublish": "rimraf lib && babel src --out-dir lib",
-    "test": "standard",
-    "lint": "standard"
+    "test": "mocha --timeout 30000",
+    "test:watch": "nodemon --exec 'mocha --timeout 30000' --watch src --watch example --watch test",
+    "lint": "standard",
+    "pretest": "standard"
   },
   "main": "lib/index.js",
   "files": [
@@ -29,7 +31,11 @@
     "babel-preset-latest": "^6.24.1",
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-0": "^6.24.1",
+    "expect": "^1.20.2",
+    "mocha": "^3.2.0",
     "next": "^2.1.1",
+    "nightmare": "^2.10.0",
+    "nodemon": "^1.11.0",
     "react": "^15.5.3",
     "react-dom": "^15.5.3",
     "rimraf": "^2.6.1",

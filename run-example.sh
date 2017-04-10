@@ -6,7 +6,6 @@ set -e
 [ -z "${GITHUB_CLIENT_SECRET}" ] && echo "GITHUB_CLIENT_SECRET is required" && exit 1;
 
 # install and link libray
-cd ..
 yarn install
 yarn link
 

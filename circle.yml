@@ -3,11 +3,13 @@ machine:
     PATH: "${PATH}:${HOME}/${CIRCLE_PROJECT_REPONAME}/node_modules/.bin"
   node:
     version: 6
+  post:
+    - "cd next-github-auth && ./run-example.sh":
+        background: true
+    - sleep 50
 dependencies:
   override:
-    - yarn
-  cache_directories:
-    - ~/.cache/yarn
+    - echo install completed in machine.post, skipping
 test:
   override:
     - yarn test
