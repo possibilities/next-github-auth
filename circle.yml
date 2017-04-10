@@ -4,7 +4,8 @@ machine:
   node:
     version: 6
   post:
-    - "cd next-github-auth && ./run-example.sh":
+    - rm -rf ./next-github-auth/node_modules/electron
+    - "cd ./next-github-auth && ./run-example.sh":
         background: true
     - sleep 60
 dependencies:
