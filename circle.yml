@@ -6,7 +6,7 @@ machine:
   post:
     - "cd next-github-auth && ./run-example.sh":
         background: true
-    - sleep 50
+    - sleep 60
 dependencies:
   override:
     - echo install completed in machine.post, skipping
