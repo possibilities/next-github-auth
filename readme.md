@@ -49,38 +49,7 @@ Components and decorators for using [Github](https://github.com) authentication 
     export default PublicPage(Public)
     ```
 
-1. Optionally access the currently signed in github user and access tokens via context, e.g:
-
-    ```
-    import React from 'react'
-    import PropTypes from 'prop-types'
-    import { PrivatePage } from 'next-github-auth'
-
-    const UserProfile = (props, {
-      github: {
-        accessToken,
-        user: { login }
-      }
-    }) => (
-      <div>
-        <div>{login}'s profile</div>
-        <div>token: {accessToken ? 'hidden' : 'not available'}</div>
-      </div>
-    )
-
-    UserProfile.contextTypes = {
-      github: PropTypes.shape({
-        accessToken: PropTypes.string,
-        user: PropTypes.shape({
-          login: PropTypes.string
-        })
-      })
-    }
-
-    export default PrivatePage(UserProfile)
-    ```
-
-1. Optionally access the currently signed in github user and access tokens via `getInitialProps` "page context", e.g:
+1. Optionally access the currently signed in github user and access tokens in a Next page component's `getInitialProps`, e.g:
 
     ```
     import React from 'react'
@@ -112,6 +81,37 @@ Components and decorators for using [Github](https://github.com) authentication 
       const githubRepos = await getGithubRepos(accessToken)
       const repos = githubRepos.map(repoView)
       return { repos }
+    }
+
+    export default PrivatePage(UserProfile)
+    ```
+
+1. Optionally access the currently signed in github user and access tokens via React's `context`, e.g:
+
+    ```
+    import React from 'react'
+    import PropTypes from 'prop-types'
+    import { PrivatePage } from 'next-github-auth'
+
+    const UserProfile = (props, {
+      github: {
+        accessToken,
+        user: { login }
+      }
+    }) => (
+      <div>
+        <div>{login}'s profile</div>
+        <div>token: {accessToken ? 'hidden' : 'not available'}</div>
+      </div>
+    )
+
+    UserProfile.contextTypes = {
+      github: PropTypes.shape({
+        accessToken: PropTypes.string,
+        user: PropTypes.shape({
+          login: PropTypes.string
+        })
+      })
     }
 
     export default PrivatePage(UserProfile)
