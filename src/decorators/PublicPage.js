@@ -1,24 +1,13 @@
 import compose from '../modules/compose'
 
-import EnvironmentVariables from './EnvironmentVariables'
+import PageDecoratorInvariant from 'next-page-decorator-invariant'
+import PageEnvironment from 'next-page-environment'
 import GithubContext from './GithubContext'
 
-let decorators = []
-
-if (process.env.NODE_ENV === 'development') {
-  const PageDecoratorInvariant = require('./PageDecoratorInvariant').default
-  decorators = [
-    ...decorators,
-    PageDecoratorInvariant('PublicPage')
-  ]
-}
-
-decorators = [
-  ...decorators,
-  EnvironmentVariables({ GITHUB_CLIENT_ID: 'githubClientId' }),
+const PublicPage = compose(
+  PageDecoratorInvariant('PublicPage'),
+  PageEnvironment({ githubClientId: process.env.GITHUB_CLIENT_ID }),
   GithubContext
-]
-
-const PublicPage = compose(...decorators)
+)
 
 export default PublicPage

@@ -1,7 +1,4 @@
 {
-  "engines": {
-    "node": "6.x.x"
-  },
   "scripts": {
     "dev": "next",
     "build": "next build",

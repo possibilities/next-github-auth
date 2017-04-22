@@ -1,26 +1,15 @@
 import compose from '../modules/compose'
 
-import EnvironmentVariables from './EnvironmentVariables'
+import PageDecoratorInvariant from 'next-page-decorator-invariant'
+import PageEnvironment from 'next-page-environment'
 import GithubContext from './GithubContext'
 import DemandSignedIn from './DemandSignedIn'
 
-let decorators = []
-
-if (process.env.NODE_ENV === 'development') {
-  const PageDecoratorInvariant = require('./PageDecoratorInvariant').default
-  decorators = [
-    ...decorators,
-    PageDecoratorInvariant('PrivatePage')
-  ]
-}
-
-decorators = [
-  ...decorators,
-  EnvironmentVariables({ GITHUB_CLIENT_ID: 'githubClientId' }),
+const PrivatePage = compose(
+  PageDecoratorInvariant('PrivatePage'),
+  PageEnvironment({ githubClientId: process.env.GITHUB_CLIENT_ID }),
   GithubContext,
   DemandSignedIn
-]
-
-const PrivatePage = compose(...decorators)
+)
 
 export default PrivatePage
