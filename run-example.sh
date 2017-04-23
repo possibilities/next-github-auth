@@ -7,7 +7,7 @@ set -e
 
 # install and link libray
 yarn install
-yarn link
+yarn link --force
 
 # install and run app
 cd example
