@@ -832,7 +832,7 @@ babel-plugin-transform-es2015-modules-amd@^6.24.1:
     babel-runtime "^6.22.0"
     babel-template "^6.24.1"
 
-babel-plugin-transform-es2015-modules-commonjs@6.24.0:
+babel-plugin-transform-es2015-modules-commonjs@6.24.0, babel-plugin-transform-es2015-modules-commonjs@^6.18.0:
   version "6.24.0"
   resolved "https://registry.yarnpkg.com/babel-plugin-transform-es2015-modules-commonjs/-/babel-plugin-transform-es2015-modules-commonjs-6.24.0.tgz#e921aefb72c2cc26cb03d107626156413222134f"
   dependencies:
@@ -841,7 +841,7 @@ babel-plugin-transform-es2015-modules-commonjs@6.24.0:
     babel-template "^6.23.0"
     babel-types "^6.23.0"
 
-babel-plugin-transform-es2015-modules-commonjs@^6.18.0, babel-plugin-transform-es2015-modules-commonjs@^6.24.1:
+babel-plugin-transform-es2015-modules-commonjs@^6.24.1:
   version "6.24.1"
   resolved "https://registry.yarnpkg.com/babel-plugin-transform-es2015-modules-commonjs/-/babel-plugin-transform-es2015-modules-commonjs-6.24.1.tgz#d3e310b40ef664a36622200097c6d440298f2bfe"
   dependencies:
@@ -3717,9 +3717,9 @@ next-page-decorator-invariant@^0.1.2:
   dependencies:
     invariant "^2.2.2"
 
-next-page-environment@^0.1.1:
-  version "0.1.1"
-  resolved "https://registry.yarnpkg.com/next-page-environment/-/next-page-environment-0.1.1.tgz#ec0266d47077b4ee0fc003b79b4cd939cb39ac58"
+next-page-environment@^0.1.2:
+  version "0.1.2"
+  resolved "https://registry.yarnpkg.com/next-page-environment/-/next-page-environment-0.1.2.tgz#1cd8c2f7c49422161748878168740b493d49a28c"
   dependencies:
     next-page-decorator-invariant "^0.1.2"
 
