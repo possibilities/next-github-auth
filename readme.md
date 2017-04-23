@@ -27,6 +27,14 @@ Components and decorators for using [Github](https://github.com) authentication 
     export default SignOut
     ```
 
+    If you need to customize the scope you can pass configure the `SignIn` page
+
+    ```
+    import { configureSignIn } from 'next-github-auth'
+    const SignIn({ scope: 'repo gist' })
+    export default SignIn
+    ```
+
 1. Wrap private pages with `PrivatePage` decorator
 
     Any Next.js "page" that should only be accessible to authenticated users should be wrapped with the `PrivatePage` decorator, e.g.:
