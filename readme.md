@@ -31,7 +31,7 @@ Components and decorators for using [Github](https://github.com) authentication 
 
     ```
     import { configureSignIn } from 'next-github-auth'
-    const SignIn({ scope: 'repo gist' })
+    const SignIn = configureSignIn({ scope: 'repo gist' })
     export default SignIn
     ```
 
