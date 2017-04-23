@@ -3,14 +3,9 @@ machine:
     PATH: "${PATH}:${HOME}/${CIRCLE_PROJECT_REPONAME}/node_modules/.bin"
   node:
     version: 6
-  post:
-    - rm -rf ./next-github-auth/node_modules
-    - "cd ./next-github-auth && ./run-example.sh":
-        background: true
-    - sleep 60
 dependencies:
   override:
-    - echo install completed in machine.post, skipping
+    - yarn install
 test:
   override:
-    - yarn test
+    - node ./run-tests.js
