@@ -33,7 +33,8 @@ class SignIn extends Component {
   static propTypes = {
     githubClientId: PropTypes.string.isRequired,
     afterSignInUrl: PropTypes.string.isRequired,
-    isAuthorized: PropTypes.bool.isRequired
+    isAuthorized: PropTypes.bool.isRequired,
+    scope: PropTypes.string
   }
 
   static defaultProps = {
