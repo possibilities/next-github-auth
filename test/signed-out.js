@@ -84,6 +84,22 @@ test.cb('visiting private page prompts for authorization', t => {
     .catch(error => t.end(error))
 })
 
+test.cb('visiting private page prompts for authorization within scope', t => {
+  t.context.browser
+    .goto('http://localhost:3000/private')
+    .wait(2000)
+    .evaluate(() => document.querySelector('body').innerText)
+    .end()
+    .then(pageText => {
+      t.truthy(pageText.includes('Authorize application'))
+      // Make sure we're bring prompted for repos
+      t.truthy(pageText.includes('Repositories'))
+      t.truthy(pageText.includes('Public and private'))
+      t.end()
+    })
+    .catch(error => t.end(error))
+})
+
 test.cb('visiting private page via client navigation prompts for authorization', t => {
   t.context.browser
     .goto('http://localhost:3000')
