@@ -27,7 +27,7 @@
   "dependencies": {
     "axios": "^0.16.0",
     "next-page-decorator-invariant": "^0.1.2",
-    "next-page-environment": "^0.1.1",
+    "next-page-environment": "^0.1.2",
     "prop-types": "^15.5.4"
   },
   "devDependencies": {
