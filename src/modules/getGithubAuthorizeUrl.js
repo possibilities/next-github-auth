@@ -20,7 +20,7 @@ const getRedirectUri = (githubClientId, afterSignInUrl) => {
   return encodeURIComponent(afterAuthUrl)
 }
 
-const getGithubAuthorizeUrl = (githubClientId, afterSignInUrl) => {
+const getGithubAuthorizeUrl = (githubClientId, githubScope, afterSignInUrl) => {
   if (!githubClientId) {
     throw new Error('Client id is not defined')
   }
@@ -28,7 +28,7 @@ const getGithubAuthorizeUrl = (githubClientId, afterSignInUrl) => {
   const githubAuthorizeParams = queryStringFromObj({
     client_id: githubClientId,
     redirect_uri: getRedirectUri(githubClientId, afterSignInUrl),
-    scope: 'repo'
+    scope: githubScope
   })
 
   return `${githubAuthorizeUrl}?${githubAuthorizeParams}`

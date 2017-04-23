@@ -33,7 +33,12 @@ class SignIn extends Component {
   static propTypes = {
     githubClientId: PropTypes.string.isRequired,
     afterSignInUrl: PropTypes.string.isRequired,
-    isAuthorized: PropTypes.bool.isRequired
+    isAuthorized: PropTypes.bool.isRequired,
+    scope: PropTypes.string
+  }
+
+  static defaultProps = {
+    scope: ''
   }
 
   static async getInitialProps ({
@@ -66,14 +71,16 @@ class SignIn extends Component {
   constructor (props) {
     super(props)
 
-    const { afterSignInUrl, isAuthorized, githubClientId } = props
-
-    if (process.browser && afterSignInUrl) {
-      if (isAuthorized) {
+    if (process.browser && props.afterSignInUrl) {
+      if (props.isAuthorized) {
         // Wait to redirect on the client so the cookie will be available
-        window.location = afterSignInUrl
+        window.location = props.afterSignInUrl
       } else {
-        window.location = getGithubAuthorizeUrl(githubClientId, afterSignInUrl)
+        window.location = getGithubAuthorizeUrl(
+          props.githubClientId,
+          props.scope,
+          props.afterSignInUrl
+        )
       }
     }
   }
