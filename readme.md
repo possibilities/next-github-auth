@@ -17,7 +17,8 @@ Components and decorators for using [Github](https://github.com) authentication 
     At `pages/sign-in.js`
 
     ```
-    import { SignIn } from 'next-github-auth' export default SignIn
+    import { SignIn } from 'next-github-auth'
+    export default SignIn
     ```
 
     At `pages/sign-out.js`
@@ -37,7 +38,7 @@ Components and decorators for using [Github](https://github.com) authentication 
 
 1. Wrap private pages with `PrivatePage` decorator
 
-    Any Next.js "page" that should only be accessible to authenticated users should be wrapped with the `PrivatePage` decorator, e.g.:
+    Any Next.js page that should only be accessible to authenticated users should be wrapped with the `PrivatePage` decorator, e.g.:
 
     ```
     import { PrivatePage } from 'next-github-auth'
@@ -48,7 +49,7 @@ Components and decorators for using [Github](https://github.com) authentication 
 
 1. Wrap public pages with `PublicPage` decorator
 
-    _All other_ Next.js "pages" should be wrapped with the `PublicPage` decorator, e.g.:
+    _All other_ Next.js pages should be wrapped with the `PublicPage` decorator, e.g.:
 
     ```
     import { PublicPage } from 'next-github-auth'
