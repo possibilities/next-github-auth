@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import getGithubAuthorizeUrl from '../modules/getGithubAuthorizeUrl'
 
 const DemandSignedIn = Page => {
   return class DemandSignedInWrapper extends Component {
@@ -13,13 +12,13 @@ const DemandSignedIn = Page => {
     static async getInitialProps (pageContext) {
       const {
         env: { githubClientId },
-        pathname: afterSignInUrl,
+        pathname: afterSignInUrl = '/',
         github
       } = pageContext
 
       if (!github.user) {
         if (process.browser) {
-          window.location = getGithubAuthorizeUrl(githubClientId, afterSignInUrl)
+          window.location = `/sign-in?afterSignInUrl=${afterSignInUrl}`
           return { isRedirecting: true }
         } else {
           return { afterSignInUrl, githubClientId }
@@ -42,10 +41,7 @@ const DemandSignedIn = Page => {
       super(props)
       if (process.browser) {
         if (!props.github.user && !props.isRedirecting) {
-          window.location = getGithubAuthorizeUrl(
-            props.githubClientId,
-            props.afterSignInUrl
-          )
+          window.location = `/sign-in?afterSignInUrl=${props.afterSignInUrl}`
         }
       }
     }
