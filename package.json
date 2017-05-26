@@ -8,9 +8,6 @@
   },
   "author": "Mike Bannister <mikebannister@gmail.com>",
   "license": "MIT",
-  "engines": {
-    "node": "6.x.x"
-  },
   "scripts": {
     "dev": "rimraf lib && babel src --out-dir lib --watch",
     "build": "rimraf lib && babel src --out-dir lib",
