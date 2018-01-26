@@ -1,4 +1,5 @@
-const githubAuthorizeUrl = 'https://github.com/login/oauth/authorize'
+const GITHUB_URL = process.env.GITHUB_URL || 'https://github.com'
+const githubAuthorizeUrl = `${GITHUB_URL}/login/oauth/authorize`
 
 const queryStringFromObj = queryObj =>
   Object.keys(queryObj)

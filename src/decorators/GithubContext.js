@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import request from 'axios'
 import NextGlobalClientStore from '../modules/NextGlobalClientStore'
+const GITHUB_API_URL = process.env.GITHUB_API_URL || 'https://api.github.com'
 
 const getGithubAccessToken = req => {
   if (process.browser) {
@@ -27,7 +28,7 @@ const getGithubUser = async githubAccessToken => {
     return NextGlobalClientStore.get('githubUser')
   }
 
-  const url = `https://api.github.com/user`
+  const url = `${GITHUB_API_URL}/user`
   const headers = { Authorization: `token ${githubAccessToken}` }
   const options = { headers }
 

@@ -6,7 +6,8 @@ import getGithubAccessTokenCookie from '../modules/getGithubAccessTokenCookie'
 import getGithubAuthorizeUrl from '../modules/getGithubAuthorizeUrl'
 import PublicPage from '../decorators/PublicPage'
 
-const githubAccessTokenUrl = 'https://github.com/login/oauth/access_token'
+const GITHUB_URL = process.env.GITHUB_URL || 'https://github.com'
+const githubAccessTokenUrl = `${GITHUB_URL}/login/oauth/access_token`
 const githubClientSecret = demandEnvVar('GITHUB_CLIENT_SECRET')
 
 const fetchGithubAccessToken = async (githubAuthCode, githubClientId) => {
